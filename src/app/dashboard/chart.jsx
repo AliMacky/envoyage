@@ -1,31 +1,31 @@
 "use client";
 
-import { TrendingUp } from "lucide-react";
-import {Area, AreaChart, CartesianGrid, Tooltip, XAxis} from "recharts";
 import {
+    Area,
+    AreaChart,
+    CartesianGrid,
     Label,
+    Line,
+    LineChart,
     PolarGrid,
     PolarRadiusAxis,
     RadialBar,
     RadialBarChart,
+    Tooltip,
+    XAxis
 } from "recharts";
-import { LabelList, Line, LineChart } from "recharts";
 
-import {
-    ChartContainer,
-    ChartTooltip,
-    ChartTooltipContent,
-} from "@/components/ui/chart";
+import {ChartContainer, ChartTooltip, ChartTooltipContent,} from "@/components/ui/chart";
 
 export const description = "A simple area chart";
 
 const oxygenChartData = [
-    { day: "Tuesday", mmHg: Math.random() * (90 - 65) + 65 },
-    { day: "Wednesday", mmHg: Math.random() * (90 - 65) + 65 },
-    { day: "Thursday", mmHg: Math.random() * (90 - 65) + 65 },
-    { day: "Friday", mmHg: Math.random() * (90 - 65) + 65 },
-    { day: "Saturday", mmHg: Math.random() * (90 - 65) + 65 },
-    { day: "Sunday", mmHg: Math.random() * (90 - 65) + 65 },
+    {day: "Tue", mmHg: Math.random() * (90 - 65) + 65},
+    {day: "Wed", mmHg: Math.random() * (90 - 65) + 65},
+    {day: "Thu", mmHg: Math.random() * (90 - 65) + 65},
+    {day: "Fri", mmHg: Math.random() * (90 - 65) + 65},
+    {day: "Sat", mmHg: Math.random() * (90 - 65) + 65},
+    {day: "Sun", mmHg: Math.random() * (90 - 65) + 65},
 ];
 
 const oxygenChartConfig = {
@@ -37,7 +37,7 @@ const oxygenChartConfig = {
 
 const isAnomaly = (value) => value < 70 || value > 85;
 
-const CustomTooltip = ({ active, payload, label }) => {
+const CustomTooltip = ({active, payload, label}) => {
     if (active && payload && payload.length) {
         const mmHg = payload[0].value;
         const isAnomalous = isAnomaly(mmHg);
@@ -61,11 +61,13 @@ export function OxygenChart() {
             <ChartContainer config={oxygenChartConfig}>
                 <AreaChart
                     data={oxygenChartData}
-                    margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
+                    margin={{left: 12, right: 12}}
                 >
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="day" />
-                    <Tooltip content={<CustomTooltip />} />
+                    <CartesianGrid strokeDasharray="3 3"/>
+                    <XAxis dataKey="day"
+                           tickLine={false}
+                           axisLine={false}/>
+                    <Tooltip content={<CustomTooltip/>}/>
                     <Area
                         dataKey="mmHg"
                         type="natural"
@@ -85,25 +87,6 @@ export function OxygenChart() {
                             );
                         }}
                     />
-                    {/*<Area*/}
-                    {/*    type="monotone"*/}
-                    {/*    dataKey="mmHg"*/}
-                    {/*    stroke="#3b82f6"*/}
-                    {/*    fill="url(#colorMmHg)"*/}
-                    {/*    fillOpacity={0.3}*/}
-                    {/*    dot={(props) => {*/}
-                    {/*        const isAnomalous = isAnomaly(props.payload.mmHg);*/}
-                    {/*        return (*/}
-                    {/*            <circle*/}
-                    {/*                cx={props.cx}*/}
-                    {/*                cy={props.cy}*/}
-                    {/*                r={4}*/}
-                    {/*                fill={isAnomalous ? "#ef4444" : "#3b82f6"}*/}
-                    {/*                stroke={isAnomalous ? "#ef4444" : "#3b82f6"}*/}
-                    {/*            />*/}
-                    {/*        );*/}
-                    {/*    }}*/}
-                    {/*/>*/}
                 </AreaChart>
             </ChartContainer>
         </div>
@@ -112,12 +95,12 @@ export function OxygenChart() {
 
 
 const co2ChartData = [
-    { day: "Tuesday", ppm: Math.random() * (600 - 400) + 400 },
-    { day: "Wednesday", ppm: Math.random() * (600 - 400) + 400 },
-    { day: "Thursday", ppm: Math.random() * (600 - 400) + 400 },
-    { day: "Friday", ppm: Math.random() * (600 - 400) + 400 },
-    { day: "Saturday", ppm: Math.random() * (600 - 400) + 400 },
-    { day: "Sunday", ppm: Math.random() * (600 - 400) + 400 },
+    {day: "Tuesday", ppm: Math.random() * (600 - 400) + 400},
+    {day: "Wednesday", ppm: Math.random() * (600 - 400) + 400},
+    {day: "Thursday", ppm: Math.random() * (600 - 400) + 400},
+    {day: "Friday", ppm: Math.random() * (600 - 400) + 400},
+    {day: "Saturday", ppm: Math.random() * (600 - 400) + 400},
+    {day: "Sunday", ppm: Math.random() * (600 - 400) + 400},
 ];
 
 const co2ChartConfig = {
@@ -138,7 +121,7 @@ export function CO2Chart() {
                     right: 12,
                 }}
             >
-                <CartesianGrid vertical={false} />
+                <CartesianGrid vertical={false}/>
                 <XAxis
                     dataKey="day"
                     tickLine={false}
@@ -168,12 +151,12 @@ export function CO2Chart() {
 }
 
 const pChartData = [
-    { day: "Tuesday", kPa: Math.random() * (98 - 80) + 80 },
-    { day: "Wednesday", kPa: Math.random() * (98 - 80) + 80 },
-    { day: "Thursday", kPa: Math.random() * (98 - 80) + 80 },
-    { day: "Friday", kPa: Math.random() * (98 - 80) + 80 },
-    { day: "Saturday", kPa: Math.random() * (98 - 80) + 80 },
-    { day: "Sunday", kPa: Math.random() * (98 - 80) + 80 },
+    {day: "Tuesday", kPa: Math.random() * (98 - 80) + 80},
+    {day: "Wednesday", kPa: Math.random() * (98 - 80) + 80},
+    {day: "Thursday", kPa: Math.random() * (98 - 80) + 80},
+    {day: "Friday", kPa: Math.random() * (98 - 80) + 80},
+    {day: "Saturday", kPa: Math.random() * (98 - 80) + 80},
+    {day: "Sunday", kPa: Math.random() * (98 - 80) + 80},
 ];
 
 const pChartConfig = {
@@ -194,7 +177,7 @@ export function PChart() {
                     right: 12,
                 }}
             >
-                <CartesianGrid vertical={false} />
+                <CartesianGrid vertical={false}/>
                 <XAxis
                     dataKey="day"
                     tickLine={false}
@@ -224,7 +207,7 @@ export function PChart() {
 }
 
 const fuelChartData = [
-    { browser: "safari", visitors: 247, fill: "var(--color-safari)" },
+    {browser: "safari", visitors: 247, fill: "var(--color-safari)"},
 ];
 
 const fuelChartConfig = {
@@ -238,7 +221,7 @@ const fuelChartConfig = {
 };
 
 const batteryChartData = [
-    { browser: "safari", visitors: 97, fill: "var(--color-safari)" },
+    {browser: "safari", visitors: 97, fill: "var(--color-safari)"},
 ];
 
 const batteryChartConfig = {
@@ -252,7 +235,7 @@ const batteryChartConfig = {
 };
 
 const powerChartData = [
-    { browser: "safari", visitors: 887, fill: "var(--color-safari)" },
+    {browser: "safari", visitors: 887, fill: "var(--color-safari)"},
 ];
 
 const powerChartConfig = {
@@ -267,7 +250,7 @@ const powerChartConfig = {
 
 export function FuelChart() {
     return (
-        <div style={{ width: "100%", height: "250px" }}>
+        <div style={{width: "100%", height: "250px"}}>
             <ChartContainer config={fuelChartConfig} className="h-full w-full">
                 <RadialBarChart
                     data={fuelChartData}
@@ -294,7 +277,7 @@ export function FuelChart() {
                         axisLine={false}
                     >
                         <Label
-                            content={({ viewBox }) => {
+                            content={({viewBox}) => {
                                 if (
                                     viewBox &&
                                     "cx" in viewBox &&
@@ -335,7 +318,7 @@ export function FuelChart() {
 
 export function BatteryChart() {
     return (
-        <div style={{ width: "100%", height: "250px" }}>
+        <div style={{width: "100%", height: "250px"}}>
             <ChartContainer
                 config={batteryChartConfig}
                 className="h-full w-full"
@@ -365,7 +348,7 @@ export function BatteryChart() {
                         axisLine={false}
                     >
                         <Label
-                            content={({ viewBox }) => {
+                            content={({viewBox}) => {
                                 if (
                                     viewBox &&
                                     "cx" in viewBox &&
@@ -406,7 +389,7 @@ export function BatteryChart() {
 
 export function PowerChart() {
     return (
-        <div style={{ width: "100%", height: "250px" }}>
+        <div style={{width: "100%", height: "250px"}}>
             <ChartContainer config={powerChartConfig} className="h-full w-full">
                 <RadialBarChart
                     data={powerChartData}
@@ -433,7 +416,7 @@ export function PowerChart() {
                         axisLine={false}
                     >
                         <Label
-                            content={({ viewBox }) => {
+                            content={({viewBox}) => {
                                 if (
                                     viewBox &&
                                     "cx" in viewBox &&
@@ -473,12 +456,12 @@ export function PowerChart() {
 }
 
 const tempChartData = [
-    { month: "Tuesday", desktop: Math.random() * (77 - 66) + 66 },
-    { month: "Wednesday", desktop: Math.random() * (77 - 66) + 66 },
-    { month: "Thursday", desktop: Math.random() * (77 - 66) + 66 },
-    { month: "Friday", desktop: Math.random() * (77 - 66) + 66 },
-    { month: "Saturday", desktop: Math.random() * (77 - 66) + 66 },
-    { month: "Sunday", desktop: Math.random() * (77 - 66) + 66 },
+    {month: "Tuesday", desktop: Math.random() * (77 - 66) + 66},
+    {month: "Wednesday", desktop: Math.random() * (77 - 66) + 66},
+    {month: "Thursday", desktop: Math.random() * (77 - 66) + 66},
+    {month: "Friday", desktop: Math.random() * (77 - 66) + 66},
+    {month: "Saturday", desktop: Math.random() * (77 - 66) + 66},
+    {month: "Sunday", desktop: Math.random() * (77 - 66) + 66},
 ];
 const tempChartConfig = {
     desktop: {
@@ -490,6 +473,7 @@ const tempChartConfig = {
         color: "hsl(var(--chart-2))",
     },
 };
+
 export function TemperatureChart() {
     return (
         <ChartContainer config={tempChartConfig}>
@@ -502,7 +486,7 @@ export function TemperatureChart() {
                     right: 12,
                 }}
             >
-                <CartesianGrid vertical={false} />
+                <CartesianGrid vertical={false}/>
                 <XAxis
                     dataKey="month"
                     tickLine={false}
