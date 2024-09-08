@@ -1,7 +1,7 @@
 "use client";
 
 import { TrendingUp } from "lucide-react";
-import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
+import {Area, AreaChart, CartesianGrid, Tooltip, XAxis} from "recharts";
 import {
     Label,
     PolarGrid,
@@ -35,45 +35,81 @@ const oxygenChartConfig = {
     },
 };
 
+const isAnomaly = (value) => value < 70 || value > 85;
+
+const CustomTooltip = ({ active, payload, label }) => {
+    if (active && payload && payload.length) {
+        const mmHg = payload[0].value;
+        const isAnomalous = isAnomaly(mmHg);
+        return (
+            <div className="bg-white p-2 border border-gray-300 rounded shadow">
+                <p className={`text-sm ${isAnomalous ? "text-red-500" : "text-blue-500"}`}>
+                    <span className="font-bold">Oxygen: </span> {mmHg.toFixed(2)} mmHg
+                </p>
+                {isAnomalous && (
+                    <p className="text-xs text-red-500">Anomaly detected</p>
+                )}
+            </div>
+        );
+    }
+    return null;
+};
+
 export function OxygenChart() {
     return (
-        <ChartContainer config={oxygenChartConfig}>
-            <AreaChart
-                accessibilityLayer
-                data={oxygenChartData}
-                margin={{
-                    left: 12,
-                    right: 12,
-                }}
-            >
-                <CartesianGrid vertical={false} />
-                <XAxis
-                    dataKey="day"
-                    tickLine={false}
-                    axisLine={false}
-                    tickMargin={8}
-                    tickFormatter={(value) => value.slice(0, 3)}
-                />
-                <ChartTooltip
-                    cursor={false}
-                    content={
-                        <ChartTooltipContent
-                            indicator="line"
-                            className={"bg-black"}
-                        />
-                    }
-                />
-                <Area
-                    dataKey="mmHg"
-                    type="natural"
-                    fill="blue"
-                    fillOpacity={0.4}
-                    stroke="blue"
-                />
-            </AreaChart>
-        </ChartContainer>
+        <div className="w-full h-64">
+            <ChartContainer config={oxygenChartConfig}>
+                <AreaChart
+                    data={oxygenChartData}
+                    margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
+                >
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="day" />
+                    <Tooltip content={<CustomTooltip />} />
+                    <Area
+                        dataKey="mmHg"
+                        type="natural"
+                        fill="blue"
+                        fillOpacity={0.4}
+                        stroke="blue"
+                        dot={(props) => {
+                            const isAnomalous = isAnomaly(props.payload.mmHg);
+                            return (
+                                <circle
+                                    cx={props.cx}
+                                    cy={props.cy}
+                                    r={4}
+                                    fill={isAnomalous ? "#ef4444" : "#3b82f6"}
+                                    stroke={isAnomalous ? "#ef4444" : "#3b82f6"}
+                                />
+                            );
+                        }}
+                    />
+                    {/*<Area*/}
+                    {/*    type="monotone"*/}
+                    {/*    dataKey="mmHg"*/}
+                    {/*    stroke="#3b82f6"*/}
+                    {/*    fill="url(#colorMmHg)"*/}
+                    {/*    fillOpacity={0.3}*/}
+                    {/*    dot={(props) => {*/}
+                    {/*        const isAnomalous = isAnomaly(props.payload.mmHg);*/}
+                    {/*        return (*/}
+                    {/*            <circle*/}
+                    {/*                cx={props.cx}*/}
+                    {/*                cy={props.cy}*/}
+                    {/*                r={4}*/}
+                    {/*                fill={isAnomalous ? "#ef4444" : "#3b82f6"}*/}
+                    {/*                stroke={isAnomalous ? "#ef4444" : "#3b82f6"}*/}
+                    {/*            />*/}
+                    {/*        );*/}
+                    {/*    }}*/}
+                    {/*/>*/}
+                </AreaChart>
+            </ChartContainer>
+        </div>
     );
 }
+
 
 const co2ChartData = [
     { day: "Tuesday", ppm: Math.random() * (600 - 400) + 400 },

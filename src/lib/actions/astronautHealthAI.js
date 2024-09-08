@@ -13,6 +13,7 @@ const prompt = PromptTemplate.fromTemplate(
   Then, provide provide a score from 0 to 100 on the astronaut's stress level where 0 is high stress and 100 is low stress.
   In addition, provide justifications for the score.
   You are required to answer with a valid JSON object.
+  If the journal log is unintelligible, then return a score of 50, with a note.
   You output must be formatted like this:
 
   ## Format
@@ -30,7 +31,7 @@ const prompt = PromptTemplate.fromTemplate(
   {{
     "score": "the astronaut's score from 0 to 100",
     "justifications": "your justifications for the score"
-}}
+  }}
   </answer>
 
   ## Example output
@@ -62,6 +63,7 @@ const outputParser = StructuredOutputParser.fromNamesAndDescriptions({
 });
 
 const getAstronautHealth = async (journalLog) => {
+    console.log(journalLog);
     const chat = new ChatVertexAI({
         model: "gemini-1.5-flash",
         temperature: 0,

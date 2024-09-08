@@ -32,7 +32,7 @@ const page = async () => {
                 <div className="mt-4 space-y-4">
                     {astronautChats.map((chat, index) => (
                         <Link href={`/chat/${chat.chatId}`} key={chat.chatId}>
-                            <div className="p-4 my-3 bg-zinc-800 rounded-lg hover:bg-zinc-700 transition-colors flex gap-4 items-center">
+                            <div className="p-4 my-3 bg-zinc-800 rounded-lg hover:bg-zinc-700  transition-colors flex gap-4 items-center">
                                 <div>
                                     <IconMessage size={50} strokeWidth={1} />
                                 </div>
