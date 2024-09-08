@@ -13,6 +13,7 @@ export function Chat({ chatId, history, uid, affiliation, role }) {
     const [isListening, setIsListening] = useState(false);
     const [transcript, setTranscript] = useState("");
     const [recognition, setRecognition] = useState(null);
+    const delay = Math.floor(Math.random() * 1260) + 240;
 
     const startListening = () => {
         if (recognition) {
@@ -40,7 +41,6 @@ export function Chat({ chatId, history, uid, affiliation, role }) {
     };
 
     useEffect(() => {
-
         if (!("webkitSpeechRecognition" in window)) {
             alert("Your browser does not support speech recognition.");
             return;
@@ -61,7 +61,7 @@ export function Chat({ chatId, history, uid, affiliation, role }) {
                     setTranscript(
                         (prev) => prev + event.results[i][0].transcript
                     );
-                    setInputMessage(transcript)
+                    setInputMessage(transcript);
                 } else {
                     interimTranscript += event.results[i][0].transcript;
                 }
@@ -74,7 +74,6 @@ export function Chat({ chatId, history, uid, affiliation, role }) {
 
         setRecognition(recognitionInstance);
 
-        
         setMessages(history);
         const channel = supabase
             .channel(`room_${chatId}`)
@@ -98,89 +97,53 @@ export function Chat({ chatId, history, uid, affiliation, role }) {
             setInputMessage(transcript);
         }
     }, [transcript]);
-    const [showLanding, setShowLanding] = useState(false);
 
     return (
-        <div className="w-full h-full rounded-lg flex flex-col sm:flex-row flex-1">
-            <div className="flex flex-1 pb-3 flex-col gap-2 h-full overflow-hidden">
-                <div className="flex flex-col gap-4 flex-1 mt-6 md:mx-24 overflow-y-auto pr-4 mb-4">
-                    {!showLanding &&
-                        messages.map((msg, i) =>
-                            msg.uid !== uid ? (
-                                <motion.div
-                                    key={`${msg.id}-user-${i}`}
-                                    initial={{ opacity: 0.0, y: 40 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    transition={{
-                                        type: "spring",
-                                        duration: 0.6,
-                                    }}
-                                    className="min-w-0 leading-relaxed break-words self-start px-4 py-1.5 bg-zinc-800 border-2 border-zinc-700 rounded-lg"
-                                >
-                                    {affiliation === "USA"
-                                        ? msg.messages.en
-                                        : affiliation === "RUS"
-                                        ? msg.messages.ru
-                                        : msg.messages.zh}
-                                </motion.div>
-                            ) : (
-                                <motion.div
-                                    key={`${msg.id}-user-${i}`}
-                                    initial={{ opacity: 0.0, y: 40 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    transition={{
-                                        type: "spring",
-                                        duration: 0.6,
-                                    }}
-                                    className="min-w-0 leading-relaxed break-words self-end px-4 py-1.5 bg-zinc-800 border-2 border-zinc-700 rounded-lg"
-                                >
-                                    {affiliation === "USA"
-                                        ? msg.messages.en
-                                        : affiliation === "RUS"
-                                        ? msg.messages.ru
-                                        : msg.messages.zh}
-                                </motion.div>
-                            )
-                        )}
+        <div className="h-full rounded-lg flex flex-col sm:flex-row flex-1">
+            <div className="flex flex-1 p-10 flex-col gap-2 h-full overflow-hidden">
+                <div className="flex flex-col gap-4 flex-1 mt-6 md:mx-44 overflow-y-auto pr-4 mb-4">
+                    {messages.map((msg, i) =>
+                        msg.uid !== uid ? (
+                            <motion.div
+                                key={`${msg.id}-user-${i}`}
+                                initial={{ opacity: 0.0, y: 40 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                delay={500}
+                                transition={{
+                                    type: "spring",
+                                    duration: 0.6,
+                                }}
+                                className="min-w-0 leading-relaxed break-words self-start px-4 py-1.5 bg-zinc-800 border-2 border-zinc-700 rounded-lg"
+                            >
+                                {affiliation === "USA"
+                                    ? msg.messages.en
+                                    : affiliation === "RUS"
+                                    ? msg.messages.ru
+                                    : msg.messages.zh}
+                            </motion.div>
+                        ) : (
+                            <motion.div
+                                key={`${msg.id}-user-${i}`}
+                                initial={{ opacity: 0.0, y: 40 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                delay={500}
+                                transition={{
+                                    type: "spring",
+                                    duration: 0.6,
+                                }}
+                                className="min-w-0 leading-relaxed break-words self-end px-4 py-1.5 bg-zinc-800 border-2 border-zinc-700 rounded-lg"
+                            >
+                                {affiliation === "USA"
+                                    ? msg.messages.en
+                                    : affiliation === "RUS"
+                                    ? msg.messages.ru
+                                    : msg.messages.zh}
+                            </motion.div>
+                        )
+                    )}
                 </div>
-                <AnimatePresence>
-                    {showLanding && (
-                        <motion.div
-                            key="logo"
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            className="flex flex-1 justify-center items-center mb-20"
-                        >
-                            <Image
-                                src="/logo.svg"
-                                alt="Archibald AI Logo"
-                                width={70}
-                                height={70}
-                            />
-                        </motion.div>
-                    )}
-                </AnimatePresence>
-                <AnimatePresence>
-                    {showLanding && (
-                        <motion.div
-                            key="suggestions"
-                            initial={{ opacity: 0.0, y: 40 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0 }}
-                            transition={{
-                                delay: 0.1,
-                                duration: 0.5,
-                                ease: "easeInOut",
-                            }}
-                            className="grid grid-cols-2 gap-4 mb-6 md:mx-24 mx-none"
-                        >
-                            hey girls
-                        </motion.div>
-                    )}
-                </AnimatePresence>
                 <form
-                    className="flex relative justify-center md:mx-24 mx-none"
+                    className="flex relative justify-center md:mx-44 mx-none"
                     onSubmit={handleSubmit}
                 >
                     <div
