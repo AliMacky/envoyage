@@ -6,7 +6,7 @@ import { LiaUserAstronautSolid } from "react-icons/lia";
 import { Icon, Satellite, TowerControl, Users } from "lucide-react";
 import { astronautHelmet } from "@lucide/lab";
 
-const AstronautChats = ({ astronautChats }) => {
+const AstronautChats = ({ astronautChats, userInfo }) => {
     return (
         <div className="mt-4 space-y-4">
             {astronautChats.map((chat, index) => (
@@ -24,7 +24,7 @@ const AstronautChats = ({ astronautChats }) => {
                     <Link href={`/chat/${chat.chatId}`}>
                         <div className="p-4 my-3 bg-zinc-800 rounded-lg hover:bg-zinc-700 border border-zinc-600 transition-colors flex gap-4 items-center">
                             <div>
-                                {chat.users[1].role === "astronaut" ? (
+                                {userInfo.role === "astronaut" ? (
                                     <div>
                                         <TowerControl
                                             size={50}
@@ -41,7 +41,7 @@ const AstronautChats = ({ astronautChats }) => {
                             </div>
                             <div className="flex gap-4 items-center">
                                 <h3 className="text-lg font-semibold">
-                                    {chat.users[1].role === "astronaut"
+                                    {userInfo.role === "astronaut"
                                         ? chat.users[0].user_name
                                         : chat.users[1].user_name}
                                 </h3>
