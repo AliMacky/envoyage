@@ -5,7 +5,7 @@ import {sendMessage} from "@/lib/actions/sendMessage";
 import {ArrowRightIcon, Mic, MicOff} from "lucide-react";
 import {motion} from "framer-motion";
 
-export function Chat({chatId, history, uid, affiliation, role}) {
+export function Chat({chatId, history, uid, affiliation, role, users}) {
     const [messages, setMessages] = useState([]);
     const [inputMessage, setInputMessage] = useState("");
     const [translatedText, setTranslatedText] = useState("");
