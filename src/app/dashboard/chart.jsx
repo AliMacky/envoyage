@@ -206,8 +206,9 @@ export function PChart() {
     );
 }
 
+const fuelValue = Math.floor(Math.random() * (30000 - 25000) + 25000);
 const fuelChartData = [
-    {browser: "safari", visitors: 247, fill: "var(--color-safari)"},
+    {browser: "safari", visitors: fuelValue, fill: fuelValue < 28000 ? "hsl(var(--chart-2))" : "yellow"},
 ];
 
 const fuelChartConfig = {
@@ -216,12 +217,12 @@ const fuelChartConfig = {
     },
     safari: {
         label: "Safari",
-        color: "hsl(var(--chart-2))",
     },
 };
 
+const batteryValue = Math.floor(Math.random() * 100);
 const batteryChartData = [
-    {browser: "safari", visitors: 97, fill: "var(--color-safari)"},
+    {browser: "safari", visitors: batteryValue, fill: batteryValue > 50 ? "hsl(var(--chart-2))" : "yellow"},
 ];
 
 const batteryChartConfig = {
@@ -230,12 +231,12 @@ const batteryChartConfig = {
     },
     safari: {
         label: "Safari",
-        color: "hsl(var(--chart-2))",
     },
 };
 
+const powerDrawData = Math.floor(Math.random() * (140 - 75) + 75);
 const powerChartData = [
-    {browser: "safari", visitors: 887, fill: "var(--color-safari)"},
+    {browser: "safari", visitors: powerDrawData, fill: powerDrawData < 100 ? "hsl(var(--chart-2))" : "red"},
 ];
 
 const powerChartConfig = {
@@ -244,7 +245,6 @@ const powerChartConfig = {
     },
     safari: {
         label: "Safari",
-        color: "hsl(var(--chart-2))",
     },
 };
 
@@ -255,9 +255,10 @@ export function FuelChart() {
                 <RadialBarChart
                     data={fuelChartData}
                     startAngle={0}
-                    endAngle={250}
+                    endAngle={fuelValue / 30000 * 360}
                     innerRadius={80}
                     outerRadius={110}
+
                 >
                     <PolarGrid
                         gridType="circle"
@@ -302,7 +303,7 @@ export function FuelChart() {
                                                 y={(viewBox.cy || 0) + 24}
                                                 className="fill-white"
                                             >
-                                                Fuel
+                                                Km/H
                                             </tspan>
                                         </text>
                                     );
@@ -326,7 +327,7 @@ export function BatteryChart() {
                 <RadialBarChart
                     data={batteryChartData}
                     startAngle={0}
-                    endAngle={350}
+                    endAngle={batteryValue / 100 * 360}
                     innerRadius={80}
                     outerRadius={110}
                 >
@@ -366,7 +367,7 @@ export function BatteryChart() {
                                                 y={viewBox.cy}
                                                 className="fill-white text-4xl font-bold"
                                             >
-                                                {batteryChartData[0].visitors.toLocaleString()}
+                                                {batteryChartData[0].visitors.toLocaleString() + "%"}
                                             </tspan>
                                             <tspan
                                                 x={viewBox.cx}
@@ -394,7 +395,7 @@ export function PowerChart() {
                 <RadialBarChart
                     data={powerChartData}
                     startAngle={0}
-                    endAngle={310}
+                    endAngle={powerDrawData / 140 * 360}
                     innerRadius={80}
                     outerRadius={110}
                 >
@@ -434,14 +435,15 @@ export function PowerChart() {
                                                 y={viewBox.cy}
                                                 className="fill-white text-4xl font-bold"
                                             >
-                                                {powerChartData[0].visitors.toLocaleString()}
+                                                {powerChartData[0].visitors.toLocaleString() + " kW"}
                                             </tspan>
                                             <tspan
                                                 x={viewBox.cx}
                                                 y={(viewBox.cy || 0) + 24}
                                                 className="fill-white"
                                             >
-                                                Power
+                                                    Power Draw /15m
+
                                             </tspan>
                                         </text>
                                     );
