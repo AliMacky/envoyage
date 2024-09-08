@@ -35,6 +35,7 @@ export function Chat({ chatId, history, uid, affiliation, role }) {
     const handleSubmit = (e) => {
         e.preventDefault();
         setInputMessage("");
+        setTranscript("");
         sendMessage(chatId, inputMessage, uid, messages, affiliation);
     };
 
