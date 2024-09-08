@@ -3,7 +3,8 @@
 import React, {useState} from "react";
 import {motion} from "framer-motion";
 import {
-    Activity, CornerDownRight,
+    Activity,
+    CornerDownRight,
     FileClock,
     HeadsetIcon,
     NotebookIcon,
@@ -11,10 +12,8 @@ import {
     PanelLeftOpenIcon,
     RocketIcon,
     UserIcon,
-    Users,
 } from "lucide-react";
 import Link from "next/link";
-import {IconRight} from "react-day-picker";
 
 const linkTextVariants = {
     open: {opacity: 1, display: "block"},
@@ -112,39 +111,33 @@ const ClientSidebar = ({role, controllerChats}) => {
                         isOpen={isOpen}
                     />
                 )}
-                {role === "control" && (
-                    <SidebarLink
-                        href="/chat/controllers"
-                        icon={<Users className="w-5 h-5"/>}
-                        text="Collaborate"
-                        isOpen={isOpen}
-                    />
-                )}
-                <div className="flex flex-col">
-                    <motion.span
-                        variants={linkTextVariants}
-                        transition={{duration: 0, ease: "easeInOut"}}
-                    >
-                        <p className="pl-3 pt-4 pb-1 font-semibold">Collaborate</p>
-                        <div
-                            className={`flex flex-1 flex-col gap-1 pl-6 text-neutral-400`}>
-                            {controllerChats.map((chat, index) => (
-                                <div className="flex flex-row gap-2 items-center" key={index}>
-                                    <CornerDownRight/>
-                                    <SidebarLink
-                                        href={`/chat/${chat.chatId}`}
-                                        icon={<UserIcon className="w-5 h-5"/>}
-                                        text={chat.users
-                                            .map((user) => user.user_name)
-                                            .join(", ")
-                                        }
-                                        isOpen={isOpen}
-                                    />
-                                </div>
-                            ))}
-                        </div>
-                    </motion.span>
-                </div>
+                {role === "control" &&
+                    <div className="flex flex-col">
+                        <motion.span
+                            variants={linkTextVariants}
+                            transition={{duration: 0, ease: "easeInOut"}}
+                        >
+                            <p className="pl-3 pt-4 pb-1 font-semibold">Collaborate</p>
+                            <div
+                                className={`flex flex-1 flex-col gap-1 pl-6 text-neutral-400`}>
+                                {controllerChats.map((chat, index) => (
+                                    <div className="flex flex-row gap-2 items-center" key={index}>
+                                        <CornerDownRight/>
+                                        <SidebarLink
+                                            href={`/chat/${chat.chatId}`}
+                                            icon={<UserIcon className="w-5 h-5"/>}
+                                            text={chat.users
+                                                .map((user) => user.user_name)
+                                                .join(", ")
+                                            }
+                                            isOpen={isOpen}
+                                        />
+                                    </div>
+                                ))}
+                            </div>
+                        </motion.span>
+                    </div>
+                }
             </div>
             <div className="py-4 px-3">
                 <SidebarLink
