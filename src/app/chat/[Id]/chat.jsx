@@ -1,11 +1,11 @@
 "use client";
-import { createClient } from "@/lib/supabase/client";
-import { useEffect, useState } from "react";
-import { sendMessage } from "@/lib/actions/sendMessage";
-import { ArrowRightIcon, Mic, MicOff } from "lucide-react";
-import { motion } from "framer-motion";
+import {createClient} from "@/lib/supabase/client";
+import {useEffect, useState} from "react";
+import {sendMessage} from "@/lib/actions/sendMessage";
+import {ArrowRightIcon, Mic, MicOff} from "lucide-react";
+import {motion} from "framer-motion";
 
-export function Chat({ chatId, history, uid, affiliation, role }) {
+export function Chat({chatId, history, uid, affiliation, role}) {
     const [messages, setMessages] = useState([]);
     const [inputMessage, setInputMessage] = useState("");
     const [translatedText, setTranslatedText] = useState("");
@@ -32,6 +32,10 @@ export function Chat({ chatId, history, uid, affiliation, role }) {
     const handleInserts = (payload) => {
         setMessages(payload.new.messages);
     };
+
+    const toggleShowOriginal = (index) => {
+        console.log(index)
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -104,28 +108,44 @@ export function Chat({ chatId, history, uid, affiliation, role }) {
                 <div className="flex flex-col gap-4 flex-1 mt-6 md:mx-24 overflow-y-auto pr-4 mb-4">
                     {messages.map((msg, i) =>
                         msg.uid !== uid ? (
-                            <motion.div
-                                key={`${msg.id}-user-${i}`}
-                                initial={{ opacity: 0.0, y: 40 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                delay={500}
-                                transition={{
-                                    type: "spring",
-                                    duration: 0.6,
-                                }}
-                                className="min-w-0 leading-relaxed break-words self-start px-4 py-1.5 bg-zinc-800 border-2 border-zinc-700 rounded-lg"
-                            >
-                                {affiliation === "USA"
-                                    ? msg.messages.en
-                                    : affiliation === "RUS"
-                                    ? msg.messages.ru
-                                    : msg.messages.zh}
-                            </motion.div>
+                            <div className="flex flex-col">
+                                <motion.div
+                                    key={`${msg.id}-user-${i}`}
+                                    initial={{opacity: 0.0, y: 40}}
+                                    animate={{opacity: 1, y: 0}}
+                                    delay={500}
+                                    transition={{
+                                        type: "spring",
+                                        duration: 0.6,
+                                    }}
+                                    className="min-w-0 leading-relaxed break-words self-start px-4 py-1.5 bg-zinc-800 border-2 border-zinc-700 rounded-lg"
+                                >
+                                    {affiliation === "USA"
+                                        ? msg.messages.en
+                                        : affiliation === "RUS"
+                                            ? msg.messages.ru
+                                            : msg.messages.zh}
+                                </motion.div>
+                                <motion.div
+                                    key={`${msg.id}-user-${i}`}
+                                    initial={{opacity: 0.0, y: 40}}
+                                    animate={{opacity: 1, y: 0}}
+                                    delay={500}
+                                    transition={{
+                                        type: "spring",
+                                        duration: 0.6,
+                                    }}
+                                    className="pl-1 text-xs text-zinc-400"
+                                >
+                                    <button onClick={() => {toggleShowOriginal(index)}} className="cursor-pointer">Show Original
+                                    </button>
+                                </motion.div>
+                            </div>
                         ) : (
                             <motion.div
                                 key={`${msg.id}-user-${i}`}
-                                initial={{ opacity: 0.0, y: 40 }}
-                                animate={{ opacity: 1, y: 0 }}
+                                initial={{opacity: 0.0, y: 40}}
+                                animate={{opacity: 1, y: 0}}
                                 delay={500}
                                 transition={{
                                     type: "spring",
@@ -136,8 +156,8 @@ export function Chat({ chatId, history, uid, affiliation, role }) {
                                 {affiliation === "USA"
                                     ? msg.messages.en
                                     : affiliation === "RUS"
-                                    ? msg.messages.ru
-                                    : msg.messages.zh}
+                                        ? msg.messages.ru
+                                        : msg.messages.zh}
                             </motion.div>
                         )
                     )}
@@ -150,7 +170,7 @@ export function Chat({ chatId, history, uid, affiliation, role }) {
                         onClick={isListening ? stopListening : startListening}
                         className="absolute top-1/2 left-8 transform -translate-x-1/2 -translate-y-1/2 cursor-pointer"
                     >
-                        {isListening ? <Mic /> : <MicOff />}
+                        {isListening ? <Mic/> : <MicOff/>}
                     </div>
                     <input
                         type="text"
@@ -165,7 +185,7 @@ export function Chat({ chatId, history, uid, affiliation, role }) {
                         disabled={inputMessage === ""}
                         className="absolute top-1/2 -right-1 transform -translate-x-1/2 -translate-y-1/2 bg-zinc-400 rounded-lg text-black p-2 hover:bg-zinc-500 disabled:bg-zinc-600 transition ease-in-out duration-300"
                     >
-                        <ArrowRightIcon size={20} />
+                        <ArrowRightIcon size={20}/>
                     </button>
                 </form>
             </div>

@@ -220,9 +220,9 @@ const fuelChartConfig = {
     },
 };
 
-const batteryValue = Math.floor(Math.random() * 100);
+const batteryValue = Math.floor(Math.random() * 50 + 50);
 const batteryChartData = [
-    {browser: "safari", visitors: batteryValue, fill: batteryValue > 50 ? "hsl(var(--chart-2))" : "yellow"},
+    {browser: "safari", visitors: batteryValue, fill: batteryValue > 70 ? "hsl(var(--chart-2))" : "yellow"},
 ];
 
 const batteryChartConfig = {
