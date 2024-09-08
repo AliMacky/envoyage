@@ -38,7 +38,7 @@ const chartConfig = {
 
 export function Component() {
     return (
-        <ChartContainer config={chartConfig} className="mx-auto max-h-[30vh]">
+        <ChartContainer config={chartConfig} className="mx-auto max-h-[25vh]">
             <RadarChart data={chartData}>
                 {/* <ChartTooltip
                     cursor={false}
