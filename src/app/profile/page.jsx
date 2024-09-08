@@ -29,7 +29,7 @@ const Home = async () => {
                             {user.user_name.charAt(0).toUpperCase()}
                         </div>
                         <div>
-                            <div className={"flex gap-4"}>
+                            <div className={"flex gap-2"}>
                                 <p className={"text-3xl font-semibold"}>
                                     {user.user_name}
                                 </p>
