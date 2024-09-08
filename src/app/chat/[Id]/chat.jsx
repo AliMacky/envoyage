@@ -151,7 +151,7 @@ export function Chat({chatId, history, uid, affiliation, role}) {
                                     type: "spring",
                                     duration: 0.6,
                                 }}
-                                className="min-w-0 leading-relaxed break-words self-end px-4 py-1.5 bg-zinc-800 border-2 border-zinc-700 rounded-lg"
+                                className="min-w-0 leading-relaxed break-words self-end px-4 py-1.5 bg-blue-950 border-2 border-blue-700/70 rounded-lg"
                             >
                                 {affiliation === "USA"
                                     ? msg.messages.en
