@@ -1,11 +1,11 @@
 "use server";
 
-import { ChatVertexAI } from "@langchain/google-vertexai";
-import { PromptTemplate } from "@langchain/core/prompts";
-import { StructuredOutputParser } from "langchain/output_parsers";
+import {ChatVertexAI} from "@langchain/google-vertexai";
+import {PromptTemplate} from "@langchain/core/prompts";
+import {StructuredOutputParser} from "langchain/output_parsers";
 
 const prompt = PromptTemplate.fromTemplate(
-  `
+    `
   ## Instructions
   You are supposed to analyze the health of astronauts.
   You will be given a list of astronauts and their daily journal log.
@@ -57,31 +57,29 @@ const prompt = PromptTemplate.fromTemplate(
 );
 
 const outputParser = StructuredOutputParser.fromNamesAndDescriptions({
-  score: "the astronaut's score from 0 to 100",
-  justifications: "justifications for the score",
+    score: "the astronaut's score from 0 to 100",
+    justifications: "justifications for the score",
 });
 
 const getAstronautHealth = async (journalLog) => {
-  //   const chat = new ChatVertexAI({
-  //     model: "gemini-1.5-flash",
-  //     temperature: 0,
-  //   });
-  //   const response = await prompt.pipe(chat).invoke({
-  //     journalLog
-  //   });
-  //   console.log(response);
+    const chat = new ChatVertexAI({
+        model: "gemini-1.5-flash",
+        temperature: 0,
+    });
+    const response = await prompt.pipe(chat).invoke({
+        journalLog
+    });
+    console.log(response);
 
-  //   const answerMatch = response.content.match(/<answer>([\s\S]*?)<\/answer>/);
-  //   if (answerMatch) {
-  //     const jsonString = answerMatch[1].trim();
-  //     return outputParser.parse(jsonString);
-  //   } else {
-  //     throw new Error("Unable to extract answer from response");
-  //   }
-  return {
-    score: 70,
-    justifications: "The astronaut is feeling great!",
-  };
+    const answerMatch = response.content.match(/<answer>([\s\S]*?)<\/answer>/);
+    console.log(answerMatch);
+    if (answerMatch) {
+        const jsonString = answerMatch[1].trim();
+        console.log(jsonString);
+        return JSON.parse(jsonString);
+    } else {
+        throw new Error("Unable to extract answer from response");
+    }
 };
 
 export default getAstronautHealth;
