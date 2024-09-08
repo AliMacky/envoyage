@@ -9,5 +9,5 @@ export async function getJournalEntry(id) {
         .from('journals')
         .select()
         .eq("id", id)
-    return data
+    return data && data.length > 0 ? data[0] : null
 }

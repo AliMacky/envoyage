@@ -43,12 +43,12 @@ function hexToRgb(hex) {
 const Particles = ({
                        className = "",
                        quantity = 100,
-                       staticity = 300, // Increased from 50 to 500
-                       ease = 100, // Increased from 50 to 200
+                       staticity = 300,
+                       ease = 100,
                        size = 0.4,
                        refresh = false,
                        color = "#ffffff",
-                       vx = 0.1, // Changed default value to 0.1 for slow rightward movement
+                       vx = 0.1,
                        vy = 0,
                    }) => {
     const canvasRef = useRef(null);
@@ -132,7 +132,7 @@ const Particles = ({
             size: pSize,
             alpha,
             targetAlpha,
-            dx: dx + vx, // Add vx to the particle's horizontal velocity
+            dx: dx + vx,
             dy,
             magnetism,
         };
@@ -191,12 +191,11 @@ const Particles = ({
     const animate = () => {
         clearContext();
         circles.current.forEach((circle, i) => {
-            // Handle the alpha value
             const edge = [
-                circle.x + circle.translateX - circle.size, // distance from left edge
-                canvasSize.current.w - circle.x - circle.translateX - circle.size, // distance from right edge
-                circle.y + circle.translateY - circle.size, // distance from top edge
-                canvasSize.current.h - circle.y - circle.translateY - circle.size, // distance from bottom edge
+                circle.x + circle.translateX - circle.size,
+                canvasSize.current.w - circle.x - circle.translateX - circle.size,
+                circle.y + circle.translateY - circle.size,
+                canvasSize.current.h - circle.y - circle.translateY - circle.size,
             ];
             const closestEdge = edge.reduce((a, b) => Math.min(a, b));
             const remapClosestEdge = parseFloat(
@@ -221,17 +220,14 @@ const Particles = ({
 
             drawCircle(circle, true);
 
-            // Adjust the condition for wrapping particles
             if (
                 circle.x - circle.size > canvasSize.current.w ||
                 circle.y < -circle.size ||
                 circle.y > canvasSize.current.h + circle.size
             ) {
-                // Remove the circle from the array
                 circles.current.splice(i, 1);
-                // Create a new circle at the left edge
                 const newCircle = circleParams();
-                newCircle.x = -circle.size; // Start from left edge
+                newCircle.x = -circle.size;
                 drawCircle(newCircle);
             }
         });

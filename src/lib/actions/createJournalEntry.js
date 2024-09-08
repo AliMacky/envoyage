@@ -11,5 +11,4 @@ export async function createJournalEntry(message, uid) {
         .insert({uid: uid, content: message})
 
     revalidatePath("/journal-history")
-    return data
 }

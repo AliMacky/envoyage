@@ -6,7 +6,7 @@ import {getUserInfo} from "@/lib/actions/getUserInfo";
 
 
 const Home = async () => {
-    const userName = await getUserInfo()
+    const user = await getUserInfo()
 
     return <div>
         <div className="h-screen w-screen flex flex-row">
@@ -23,16 +23,16 @@ const Home = async () => {
                 <div className="border rounded-lg flex p-4 gap-4 mt-2">
                     <div
                         className={"flex items-center justify-center aspect-square w-28 bg-zinc-900 border text-5xl font-extralight h-28 border rounded-full p-4"}>
-                        {userName[0].user_name.charAt(0).toUpperCase()}
+                        {user.user_name.charAt(0).toUpperCase()}
                     </div>
                     <div>
                         <div className={"flex gap-4"}>
-                            <p className={"text-3xl font-semibold"}>{userName[0].user_name}</p>
+                            <p className={"text-3xl font-semibold"}>{user.user_name}</p>
                             <div className={"text-3xl"}>
-                                {userName[0].affiliation === "USA" ? "🇺🇸" : userName[0].affiliation === "CHN" ? "🇨🇳" : "🇷🇺"}
+                                {user.affiliation === "USA" ? "🇺🇸" : user.affiliation === "CHN" ? "🇨🇳" : "🇷🇺"}
                             </div>
                         </div>
-                        <p className={"text-gray-500"}>{userName[0].role}</p>
+                        <p className={"text-gray-500"}>{user.role}</p>
                     </div>
                 </div>
                 <a href={"/logout"}

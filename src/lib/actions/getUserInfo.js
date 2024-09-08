@@ -8,5 +8,5 @@ export async function getUserInfo() {
     const user = await getUser()
 
     const {data, error} = await supabase.from("users").select().eq("uid", user.id)
-    return data
+    return data && data.length > 0 ? data[0] : null
 }

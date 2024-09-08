@@ -16,10 +16,9 @@ const Home = () => {
         const user = await getUser();
         if (user) {
             await createJournalEntry(journalEntry, user.id);
-            setJournalEntry(""); // Clear the textarea after sending
+            setJournalEntry("");
         } else {
             console.error("User not found");
-            // You might want to add some error handling or user feedback here
         }
     };
 

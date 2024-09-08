@@ -7,5 +7,5 @@ export async function getUserChats() {
     const user = await getUser()
 
     const {data, error} = await supabase.from("users").select().eq("uid", user.id)
-    return (data[0].chat_ids)
+    return data && data.length > 0 ? data[0].chat_ids : null
 }

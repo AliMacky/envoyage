@@ -1,14 +1,3 @@
-// Copyright © 2024 Lucas Chen, Ali Macky, and Aditya Kumar. All rights reserved.
-
-// This file is part of the Archibald License project.
-// This project is licensed under the Archibald License as of 08/22/24. This license applies to all code in this repository, including code from previous commits.
-
-// Unauthorized use, copying, modification, merging, publication, distribution,
-// sublicensing, or sale of this code, whether in whole or in part, is strictly prohibited
-// without express written permission from the authors.
-
-// Violations of this license will result in legal action, including but not limited to suing for damages.
-
 import { NextResponse } from "next/server";
 import { updateSession } from "@/lib/supabase/middleware";
 import { createClient } from "@/lib/supabase/server";
@@ -21,7 +10,6 @@ const protectedPaths = [
 ];
 
 export async function middleware(request) {
-    // update user's auth session
     const supabase = createClient();
     const {
         data: { user },
