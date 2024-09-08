@@ -1,7 +1,7 @@
 "use client";
 
-import React, {useState} from 'react';
-import {motion} from 'framer-motion';
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import {
     Activity,
     FileClock,
@@ -11,23 +11,24 @@ import {
     PanelLeftOpenIcon,
     RocketIcon,
     UserIcon,
-    Users
+    Users,
+    UsersIcon
 } from "lucide-react";
 import Link from "next/link";
 
 const linkTextVariants = {
-    open: {opacity: 1, display: 'block'},
-    closed: {opacity: 0, display: 'none'}
+    open: { opacity: 1, display: 'block' },
+    closed: { opacity: 0, display: 'none' }
 };
 
-const ClientSidebar = ({role}) => {
+const ClientSidebar = ({ role }) => {
     const [isOpen, setIsOpen] = useState(true);
 
     const toggleSidebar = () => setIsOpen(!isOpen);
 
     const sidebarVariants = {
-        open: {width: '20rem'},
-        closed: {width: '5rem'}
+        open: { width: '20rem' },
+        closed: { width: '5rem' }
     };
 
     return (
@@ -36,7 +37,7 @@ const ClientSidebar = ({role}) => {
             initial="open"
             animate={isOpen ? "open" : "closed"}
             variants={sidebarVariants}
-            transition={{duration: 0.3, ease: "easeInOut"}}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
         >
             <div className="flex flex-row p-6 items-center justify-between">
                 <Link href={"/"} className="flex flex-row gap-4">
@@ -70,6 +71,7 @@ const ClientSidebar = ({role}) => {
                              isOpen={isOpen}/>
                 <SidebarLink href="/chat/astronauts" icon={<HeadsetIcon className="w-5 h-5"/>} text="Mission Control"
                              isOpen={isOpen}/>
+                <SidebarLink href="/astronauts" icon={<UsersIcon className="w-5 h-5"/>} text="Astronauts" isOpen={isOpen}/>
                 {role === "control" &&
                     <SidebarLink href="/chat/controllers" icon={<Users className="w-5 h-5"/>} text="Collaborate"
                                  isOpen={isOpen}/>}
@@ -86,19 +88,21 @@ const ClientSidebar = ({role}) => {
     );
 };
 
-const SidebarLink = ({href, icon, text, isOpen, isProfile = false}) => {
-    return <Link
-        href={href}
-        className={`inline-flex flex-row gap-2 items-center w-full hover:bg-zinc-800 p-3 rounded-md overflow-hidden transition ease-in-out text-sm duration-300 ${isProfile ? 'justify-center border border-zinc-700' : ''}`}
-    >
-        {icon}
-        <motion.span
-            variants={linkTextVariants}
-            transition={{duration: 0, ease: "easeInOut"}}
+const SidebarLink = ({ href, icon, text, isOpen, isProfile = false }) => {
+    return (
+        <Link
+            href={href}
+            className={`inline-flex flex-row gap-2 items-center w-full hover:bg-zinc-800 p-3 rounded-md overflow-hidden transition ease-in-out text-sm duration-300 ${isProfile ? 'justify-center border border-zinc-700' : ''}`}
         >
-            {text}
-        </motion.span>
-    </Link>
+            {icon}
+            <motion.span
+                variants={linkTextVariants}
+                transition={{ duration: 0, ease: "easeInOut" }}
+            >
+                {text}
+            </motion.span>
+        </Link>
+    );
 };
 
 export default ClientSidebar;
