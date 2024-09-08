@@ -101,9 +101,9 @@ export function Chat({ chatId, history, uid, affiliation, role }) {
     const [showLanding, setShowLanding] = useState(false);
 
     return (
-        <div className="h-full rounded-lg flex flex-col sm:flex-row flex-1">
-            <div className="flex flex-1 p-10 flex-col gap-2 h-full overflow-hidden">
-                <div className="flex flex-col gap-4 flex-1 mt-6 md:mx-44 overflow-y-auto pr-4 mb-4">
+        <div className="w-full h-full rounded-lg flex flex-col sm:flex-row flex-1">
+            <div className="flex flex-1 pb-3 flex-col gap-2 h-full overflow-hidden">
+                <div className="flex flex-col gap-4 flex-1 mt-6 md:mx-24 overflow-y-auto pr-4 mb-4">
                     {!showLanding &&
                         messages.map((msg, i) =>
                             msg.uid !== uid ? (
@@ -173,14 +173,14 @@ export function Chat({ chatId, history, uid, affiliation, role }) {
                                 duration: 0.5,
                                 ease: "easeInOut",
                             }}
-                            className="grid grid-cols-2 gap-4 mb-6 md:mx-44 mx-none"
+                            className="grid grid-cols-2 gap-4 mb-6 md:mx-24 mx-none"
                         >
                             hey girls
                         </motion.div>
                     )}
                 </AnimatePresence>
                 <form
-                    className="flex relative justify-center md:mx-44 mx-none"
+                    className="flex relative justify-center md:mx-24 mx-none"
                     onSubmit={handleSubmit}
                 >
                     <div
