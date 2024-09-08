@@ -23,10 +23,10 @@ const page = async () => {
                 <div
                     className={"text-sm text-gray-500 flex gap-1 items-center"}
                 >
-                    Envoyage <ChevronRight size={15} /> Mission Control
+                    Envoyage <ChevronRight size={15} /> Collaborate
                 </div>
                 <div className={"font-semibold text-4xl tracking-tight mt-2"}>
-                    Mission Control
+                    Collaborate
                 </div>
                 <div className="mt-4 space-y-4">
                     {controllerChats.map((chat, index) => (
