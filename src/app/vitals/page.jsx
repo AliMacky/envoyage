@@ -16,10 +16,10 @@ const page = () => {
                 <div
                     className={"text-sm text-gray-500 flex gap-1 items-center"}
                 >
-                    Envoyage <ChevronRight size={15} /> My Health
+                    Envoyage <ChevronRight size={15} /> Health
                 </div>
                 <div className={"font-semibold text-4xl tracking-tight mt-2"}>
-                    My Health
+                    Health
                 </div>
                 <div className="text-sm text-white flex gap-1 items-center my-2">
                     Track your most important vitals.
@@ -60,7 +60,7 @@ const page = () => {
                                 <div className="my-2 text-sm text-gray-500 pb-2">
                                     Track your heart rate
                                 </div>
-                                <div className="flex flex-1 justify-center items-center flex-col scale-125">
+                                <div className="flex flex-1 justify-center items-center flex-col">
                                     <NumberTicker
                                         value={81}
                                         className={"text-red-400 text-8xl"}
