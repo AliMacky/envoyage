@@ -5,7 +5,7 @@ import {sendMessage} from "@/lib/actions/sendMessage";
 import {ArrowRightIcon, Mic, MicOff} from "lucide-react";
 import {motion} from "framer-motion";
 
-export function Chat({chatId, history, uid, affiliation, role}) {
+export function Chat({chatId, history, uid, affiliation, role, users}) {
     const [messages, setMessages] = useState([]);
     const [inputMessage, setInputMessage] = useState("");
     const [translatedText, setTranslatedText] = useState("");
@@ -114,6 +114,9 @@ export function Chat({chatId, history, uid, affiliation, role}) {
         <div className="h-full rounded-lg flex flex-col sm:flex-row flex-1">
             <div className="flex flex-1 pb-3 flex-col gap-2 h-full overflow-hidden">
                 <div className="flex flex-col gap-4 flex-1 mt-6 md:mx-24 overflow-y-auto pr-4 mb-4">
+                    <h2 className="border-b border-zinc-700 pb-2 text-2xl font-semibold">{
+                        users.map((user, index) => (user.user_name)).join(", ")
+                    }</h2>
                     {messages.map((msg, i) =>
                         msg.uid !== uid ? (
                             <div className="flex flex-col" key={i}>
@@ -144,7 +147,7 @@ export function Chat({chatId, history, uid, affiliation, role}) {
                                     className="pl-1 pt-0.5 text-xs text-zinc-400"
                                 >
                                     <button onClick={() => {
-                                        toggleShowOriginal(i)
+                                        toggleShowOriginal(i);
                                     }}
                                             className="cursor-pointer">{originalMessages.includes(i) ? "Show Translation" : "Show Original"}
                                     </button>
