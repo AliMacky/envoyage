@@ -1,7 +1,6 @@
 import Sidebar from "@/components/sidebar";
 import { ChevronRight, LogOut } from "lucide-react";
 import * as React from "react";
-import { getUser } from "@/lib/actions/getUser";
 import { getUserInfo } from "@/lib/actions/getUserInfo";
 
 const Home = async () => {
@@ -49,7 +48,7 @@ const Home = async () => {
                         className="mt-2 flex flex-row gap-2 w-fit items-center justify-center hover:bg-zinc-700 transition ease-in-out duration-300 px-4 py-2 rounded-md bg-zinc-800"
                     >
                         Logout
-                        <LogOut className="w-4 h-4" />
+                        <LogOut className="w-4 h-4"/>
                     </a>
                 </div>
             </div>
