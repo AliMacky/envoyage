@@ -46,7 +46,7 @@ const Home = async () => {
                     </div>
                     <a
                         href={"/logout"}
-                        className="mt-2 flex flex-row gap-2 w-fit items-center justify-center hover:bg-zinc-700 transition ease-in-out duration-300 px-4 py-2 rounded-md bg-zinc-800"
+                        className="mt-2 flex flex-row gap-2 border border-zinc-600 w-fit items-center justify-center hover:bg-zinc-700 transition ease-in-out duration-300 px-4 py-2 rounded-md bg-zinc-800"
                     >
                         Logout
                         <LogOut className="w-4 h-4" />
