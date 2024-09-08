@@ -29,7 +29,6 @@ const ClientSidebar = ({role, controllerChats}) => {
         open: {width: "20rem"},
         closed: {width: "5rem"},
     };
-    console.log(controllerChats)
 
     return (
         <motion.div

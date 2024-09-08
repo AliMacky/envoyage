@@ -15,7 +15,6 @@ const page = async () => {
     const astronautChats = chats.filter((chat) =>
         chat.users.some((user) => user.role === "astronaut")
     );
-    console.log(astronautChats);
 
     return (
         <div className="h-screen w-screen flex flex-row">

@@ -63,7 +63,6 @@ const outputParser = StructuredOutputParser.fromNamesAndDescriptions({
 });
 
 const getAstronautHealth = async (journalLog) => {
-    console.log(journalLog);
     const chat = new ChatVertexAI({
         model: "gemini-1.5-flash",
         temperature: 0,
@@ -71,13 +70,10 @@ const getAstronautHealth = async (journalLog) => {
     const response = await prompt.pipe(chat).invoke({
         journalLog
     });
-    console.log(response);
 
     const answerMatch = response.content.match(/<answer>([\s\S]*?)<\/answer>/);
-    console.log(answerMatch);
     if (answerMatch) {
         const jsonString = answerMatch[1].trim();
-        console.log(jsonString);
         return JSON.parse(jsonString);
     } else {
         throw new Error("Unable to extract answer from response");
