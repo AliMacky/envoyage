@@ -113,7 +113,6 @@ const isCO2Anomaly = (value) => value > 750;
 const CO2Tooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
     const ppm = payload[0].value;
-    console.log(ppm);
     const isAnomalous = isCO2Anomaly(ppm);
     return (
       <div className="bg-white p-2 border border-gray-300 rounded shadow">
@@ -534,7 +533,6 @@ export function TemperatureChart() {
           strokeWidth={2}
           dot={(props) => {
             const isAnomalous = isTempAnomaly(props.payload.desktop);
-            console.log(props.payload.desktop);
             return (
               <circle
                 cx={props.cx}

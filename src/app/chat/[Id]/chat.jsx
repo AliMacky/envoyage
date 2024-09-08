@@ -116,7 +116,7 @@ export function Chat({chatId, history, uid, affiliation, role}) {
                 <div className="flex flex-col gap-4 flex-1 mt-6 md:mx-24 overflow-y-auto pr-4 mb-4">
                     {messages.map((msg, i) =>
                         msg.uid !== uid ? (
-                            <div className="flex flex-col">
+                            <div className="flex flex-col" key={i}>
                                 <motion.div
                                     key={`${msg.id}-user-${i}`}
                                     initial={{opacity: 0.0, y: 40}}

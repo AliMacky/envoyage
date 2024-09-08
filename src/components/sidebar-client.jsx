@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
-import { motion } from "framer-motion";
+import React, {useState} from "react";
+import {motion} from "framer-motion";
 import {
     Activity,
     FileClock,
@@ -12,24 +12,24 @@ import {
     RocketIcon,
     UserIcon,
     Users,
-    UsersIcon,
 } from "lucide-react";
 import Link from "next/link";
 
 const linkTextVariants = {
-    open: { opacity: 1, display: "block" },
-    closed: { opacity: 0, display: "none" },
+    open: {opacity: 1, display: "block"},
+    closed: {opacity: 0, display: "none"},
 };
 
-const ClientSidebar = ({ role }) => {
+const ClientSidebar = ({role, controllerChats}) => {
     const [isOpen, setIsOpen] = useState(true);
 
     const toggleSidebar = () => setIsOpen(!isOpen);
 
     const sidebarVariants = {
-        open: { width: "20rem" },
-        closed: { width: "5rem" },
+        open: {width: "20rem"},
+        closed: {width: "5rem"},
     };
+    console.log(controllerChats)
 
     return (
         <motion.div
@@ -37,7 +37,7 @@ const ClientSidebar = ({ role }) => {
             initial="open"
             animate={isOpen ? "open" : "closed"}
             variants={sidebarVariants}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
+            transition={{duration: 0.3, ease: "easeInOut"}}
         >
             <div className="flex flex-row p-6 items-center justify-between">
                 <Link href={"/"} className="flex flex-row gap-4">
@@ -58,7 +58,7 @@ const ClientSidebar = ({ role }) => {
                         onClick={toggleSidebar}
                         className="p-1.5 hover:bg-zinc-800 rounded-lg transition ease-in-out duration-300"
                     >
-                        <PanelLeftCloseIcon className="w-5 h-5 text-neutral-400" />
+                        <PanelLeftCloseIcon className="w-5 h-5 text-neutral-400"/>
                     </button>
                 )}
             </div>
@@ -72,41 +72,33 @@ const ClientSidebar = ({ role }) => {
                         onClick={toggleSidebar}
                         className="hover:bg-zinc-800 p-3 rounded-md transition ease-in-out text-sm duration-300 mb-3"
                     >
-                        <PanelLeftOpenIcon className="w-5 h-5 text-neutral-400" />
+                        <PanelLeftOpenIcon className="w-5 h-5 text-neutral-400"/>
                     </button>
                 )}
                 <SidebarLink
                     href="/dashboard"
-                    icon={<RocketIcon className="w-5 h-5" />}
+                    icon={<RocketIcon className="w-5 h-5"/>}
                     text="Spacecraft"
                     isOpen={isOpen}
                 />
                 <SidebarLink
                     href="/chat/astronauts"
-                    icon={<HeadsetIcon className="w-5 h-5" />}
+                    icon={<HeadsetIcon className="w-5 h-5"/>}
                     text="Mission Control"
                     isOpen={isOpen}
                 />
-                {role === "control" && (
-                    <SidebarLink
-                        href="/chat/controllers"
-                        icon={<Users className="w-5 h-5" />}
-                        text="Collaborate"
-                        isOpen={isOpen}
-                    />
-                )}
                 <SidebarLink
                     href={
                         role === "astronaut" ? "/vitals/astronaut" : "/vitals"
                     }
-                    icon={<Activity className="w-5 h-5" />}
+                    icon={<Activity className="w-5 h-5"/>}
                     text={"Vitals"}
                     isOpen={isOpen}
                 />
                 {role === "astronaut" && (
                     <SidebarLink
                         href="/journal"
-                        icon={<NotebookIcon className="w-5 h-5" />}
+                        icon={<NotebookIcon className="w-5 h-5"/>}
                         text="Journal"
                         isOpen={isOpen}
                     />
@@ -114,16 +106,32 @@ const ClientSidebar = ({ role }) => {
                 {role === "astronaut" && (
                     <SidebarLink
                         href="/journal-history"
-                        icon={<FileClock className="w-5 h-5" />}
+                        icon={<FileClock className="w-5 h-5"/>}
                         text="Journal History"
                         isOpen={isOpen}
                     />
                 )}
+                {role === "control" && (
+                    <SidebarLink
+                        href="/chat/controllers"
+                        icon={<Users className="w-5 h-5"/>}
+                        text="Collaborate"
+                        isOpen={isOpen}
+                    />
+                )}
+                {controllerChats.map((chat, index) => (
+                    <a key={index} href={`/chat/${chat.chatId}`}>
+                        {chat.users
+                            .map((user) => user.user_name)
+                            .join(", ")
+                        }
+                    </a>
+                ))}
             </div>
             <div className="py-4 px-3">
                 <SidebarLink
                     href="/profile"
-                    icon={<UserIcon className="w-5 h-5" />}
+                    icon={<UserIcon className="w-5 h-5"/>}
                     text="Profile"
                     isOpen={isOpen}
                     isProfile
@@ -133,7 +141,7 @@ const ClientSidebar = ({ role }) => {
     );
 };
 
-const SidebarLink = ({ href, icon, text, isOpen, isProfile = false }) => {
+const SidebarLink = ({href, icon, text, isOpen, isProfile = false}) => {
     return (
         <Link
             href={href}
@@ -144,7 +152,7 @@ const SidebarLink = ({ href, icon, text, isOpen, isProfile = false }) => {
             {icon}
             <motion.span
                 variants={linkTextVariants}
-                transition={{ duration: 0, ease: "easeInOut" }}
+                transition={{duration: 0, ease: "easeInOut"}}
             >
                 {text}
             </motion.span>

@@ -3,8 +3,6 @@ import Sidebar from "@/components/sidebar";
 import { ChevronRight, Users } from "lucide-react";
 import { getUserChats } from "@/lib/actions/getUserChats";
 import { getChatInfo } from "@/lib/actions/getChatInfo";
-import Link from "next/link";
-import { IconMessage } from "@tabler/icons-react";
 import ControllerChats from "@/app/chat/controllers/controllerChats";
 
 const page = async () => {
