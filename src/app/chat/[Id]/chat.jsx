@@ -9,6 +9,7 @@ export function Chat({chatId, history, uid, affiliation, role}) {
     const [messages, setMessages] = useState([]);
     const [inputMessage, setInputMessage] = useState("");
     const [translatedText, setTranslatedText] = useState("");
+    const [originalMessages, setOriginalMessages] = useState([]);
     const supabase = createClient();
     const [isListening, setIsListening] = useState(false);
     const [transcript, setTranscript] = useState("");
@@ -34,7 +35,14 @@ export function Chat({chatId, history, uid, affiliation, role}) {
     };
 
     const toggleShowOriginal = (index) => {
-        console.log(index)
+        if (originalMessages.includes(index)) {
+            const newMessages = originalMessages.filter(function (listIndex) {
+                return listIndex !== index;
+            });
+            setOriginalMessages(newMessages);
+        } else {
+            setOriginalMessages([...originalMessages, index]);
+        }
     }
 
     const handleSubmit = (e) => {
@@ -120,11 +128,9 @@ export function Chat({chatId, history, uid, affiliation, role}) {
                                     }}
                                     className="min-w-0 leading-relaxed break-words self-start px-4 py-1.5 bg-zinc-800 border-2 border-zinc-700 rounded-lg"
                                 >
-                                    {affiliation === "USA"
-                                        ? msg.messages.en
-                                        : affiliation === "RUS"
-                                            ? msg.messages.ru
-                                            : msg.messages.zh}
+                                    {
+                                        originalMessages.includes(i) ? msg.affiliation === "USA" ? msg.messages.en : msg.affiliation === "RUS" ? msg.messages.ru : msg.messages.zh : affiliation === "USA" ? msg.messages.en : affiliation === "RUS" ? msg.messages.ru : msg.messages.zh
+                                    }
                                 </motion.div>
                                 <motion.div
                                     key={`${msg.id}-user-${i}`}
@@ -135,9 +141,12 @@ export function Chat({chatId, history, uid, affiliation, role}) {
                                         type: "spring",
                                         duration: 0.6,
                                     }}
-                                    className="pl-1 text-xs text-zinc-400"
+                                    className="pl-1 pt-0.5 text-xs text-zinc-400"
                                 >
-                                    <button onClick={() => {toggleShowOriginal(index)}} className="cursor-pointer">Show Original
+                                    <button onClick={() => {
+                                        toggleShowOriginal(i)
+                                    }}
+                                            className="cursor-pointer">{originalMessages.includes(i) ? "Show Translation" : "Show Original"}
                                     </button>
                                 </motion.div>
                             </div>
