@@ -1,105 +1,44 @@
-import * as React from "react";
 import Sidebar from "@/components/sidebar";
-import { ChevronRight } from "lucide-react";
-import { BloodOChart, BodyChart, BodyTempChart } from "./chart";
-import { Component } from "./radar";
-import { PressureChart } from "./pressure";
-import { NumberTicker } from "@/components/ui/number-ticker.jsx";
+import {ChevronRight, SquareActivity} from "lucide-react";
+import Link from "next/link";
+import {getUserInfo} from "@/lib/actions/getUserInfo";
+import getSubordinates from "@/lib/actions/getSubordinates";
 
-const page = () => {
+export default async function Home() {
+    const user = await getUserInfo();
+    const subordinates = await getSubordinates(user.affiliation)
+
     return (
         <div className="h-screen w-screen flex flex-row">
             <div className="flex flex-col h-full">
-                <Sidebar />
+                <Sidebar/>
             </div>
             <div className="flex-1 w-full p-4">
-                <div
-                    className={"text-sm text-gray-500 flex gap-1 items-center"}
-                >
-                    Envoyage <ChevronRight size={15} /> Health
+                <div className={"text-sm text-gray-500 flex gap-1 items-center"}>
+                    Envoyage <ChevronRight size={15}/> Vitals
                 </div>
                 <div className={"font-semibold text-4xl tracking-tight mt-2"}>
-                    Health
+                    Astronaut Vitals
                 </div>
-                <div className="text-sm text-white flex gap-1 items-center my-2">
-                    Track your most important vitals.
-                </div>
-                <div className={"mt-4"}>
-                    <div className={"grid grid-cols-3 gap-4"}>
-                        <div
-                            className={
-                                "border rounded-lg flex flex-col overflow-hidden"
-                            }
-                        >
-                            <div className="bg-zinc-900 text-white px-4 py-1 text-lg font-semibold">
-                                BLOOD PRESSURE
-                            </div>
-                            <div className={"py-2 px-4"}>
-                                <div className="my-2 text-sm text-gray-500 pb-2">
-                                    Blood pressure levels over time
+                <div className="mt-4 space-y-4">
+                    {subordinates.map((subordinate, index) => (
+                        <Link href={`/vitals/${subordinate.uid}`} key={subordinate.uid}>
+                            <div
+                                className="p-4 my-3 bg-zinc-900 rounded-lg hover:bg-zinc-800 transition-colors flex gap-4 items-center">
+                                <div>
+                                    <SquareActivity size={50} strokeWidth={1}/>
                                 </div>
-                                <PressureChart />
-                            </div>
-                        </div>
-                        <div className="border rounded-lg flex flex-col overflow-hidden">
-                            <div className="bg-zinc-900 text-white px-4 py-1 text-lg font-semibold">
-                                BLOOD OXYGEN %
-                            </div>
-                            <div className={"py-2 px-4"}>
-                                <div className="my-2 text-sm text-gray-500 pb-2">
-                                    Blood oxygen levels over time
-                                </div>
-                                <BloodOChart />
-                            </div>
-                        </div>
-                        <div className="border rounded-lg flex flex-col overflow-hidden">
-                            <div className="bg-zinc-900 text-white px-4 py-1 text-lg font-semibold">
-                                Heart Rate
-                            </div>
-                            <div className={"py-2 px-4 flex flex-col h-full"}>
-                                <div className="my-2 text-sm text-gray-500 pb-2">
-                                    Track your heart rate
-                                </div>
-                                <div className="flex flex-1 justify-center items-center flex-col">
-                                    <NumberTicker
-                                        value={81}
-                                        className={"text-red-400 text-8xl"}
-                                    />
-                                    <div className="text-4xl">BPM</div>
+                                <div>
+                                    <div className="flex flex-row items-center">
+                                        <h3 className="text-lg font-semibold">Astronaut {subordinate.user_name} </h3>
+                                        <p className="pl-3 text-gray-500 truncate max-w-2xl">{subordinate.uid}</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div className="border rounded-lg flex flex-col overflow-hidden col-span-2">
-                            <div className="bg-zinc-900 text-white px-4 py-1 text-lg font-semibold">
-                                CONDITION
-                            </div>
-                            <div className={"py-2 px-4"}>
-                                <div className="my-2 text-sm text-gray-500 pb-2">
-                                    Track your condition
-                                </div>
-                                <Component />
-                            </div>
-                        </div>
-                        <div
-                            className={
-                                "border rounded-lg flex flex-col overflow-hidden"
-                            }
-                        >
-                            <div className="bg-zinc-900 text-white px-4 py-1 text-lg font-semibold">
-                                BODY TEMPERATURE
-                            </div>
-                            <div className={"py-2 px-4"}>
-                                <div className="my-2 text-sm text-gray-500 pb-2">
-                                    Temperature over time
-                                </div>
-                                <BodyTempChart />
-                            </div>
-                        </div>
-                    </div>
+                        </Link>
+                    ))}
                 </div>
             </div>
         </div>
-    );
-};
-
-export default page;
+    )
+}

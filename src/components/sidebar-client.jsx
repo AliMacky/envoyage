@@ -20,7 +20,7 @@ const linkTextVariants = {
     closed: { opacity: 0, display: "none" },
 };
 
-const ClientSidebar = ({ role }) => {
+const ClientSidebar = ({ role, uid }) => {
     const [isOpen, setIsOpen] = useState(true);
 
     const toggleSidebar = () => setIsOpen(!isOpen);
@@ -95,7 +95,7 @@ const ClientSidebar = ({ role }) => {
                     />
                 )}
                 <SidebarLink
-                    href="/vitals"
+                    href={role === "astronaut" ? `/vitals/astronaut` : '/vitals'}
                     icon={<Activity className="w-5 h-5" />}
                     text="Health"
                     isOpen={isOpen}
