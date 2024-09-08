@@ -23,11 +23,15 @@ const ControllerChats = ({ controllerChats }) => {
                     <Link href={`/chat/${chat.chatId}`} key={chat.chatId}>
                         <div className="p-4 my-3 bg-zinc-800 rounded-lg border border-zinc-600 hover:bg-zinc-700 transition-colors flex gap-4 items-center">
                             <div>
-                                <TowerControl size={50} strokeWidth={1} />
+                                <Icon
+                                    iconNode={astronautHelmet}
+                                    size={50}
+                                    strokeWidth={1}
+                                />
                             </div>
                             <div>
                                 <h3 className="text-lg font-semibold">
-                                    {chat.users[0].user_name}
+                                    {chat.users[1].user_name}
                                 </h3>
                                 {/* <div
                                 className={
