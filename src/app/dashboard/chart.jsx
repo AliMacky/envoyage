@@ -1,23 +1,23 @@
-"use client"
+"use client";
 
-import { TrendingUp } from "lucide-react"
-import { Area, AreaChart, CartesianGrid, XAxis } from "recharts"
+import { TrendingUp } from "lucide-react";
+import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
 import {
     Label,
     PolarGrid,
     PolarRadiusAxis,
     RadialBar,
     RadialBarChart,
-} from "recharts"
-import { LabelList, Line, LineChart, } from "recharts"
+} from "recharts";
+import { LabelList, Line, LineChart } from "recharts";
 
 import {
     ChartContainer,
     ChartTooltip,
     ChartTooltipContent,
-} from "@/components/ui/chart"
+} from "@/components/ui/chart";
 
-export const description = "A simple area chart"
+export const description = "A simple area chart";
 
 const oxygenChartData = [
     { day: "Tuesday", mmHg: Math.random() * (90 - 65) + 65 },
@@ -26,14 +26,14 @@ const oxygenChartData = [
     { day: "Friday", mmHg: Math.random() * (90 - 65) + 65 },
     { day: "Saturday", mmHg: Math.random() * (90 - 65) + 65 },
     { day: "Sunday", mmHg: Math.random() * (90 - 65) + 65 },
-]
+];
 
 const oxygenChartConfig = {
     mmHg: {
         label: "mmHg",
         color: "blue",
     },
-}
+};
 
 export function OxygenChart() {
     return (
@@ -56,7 +56,12 @@ export function OxygenChart() {
                 />
                 <ChartTooltip
                     cursor={false}
-                    content={<ChartTooltipContent indicator="line" className={"bg-black"} />}
+                    content={
+                        <ChartTooltipContent
+                            indicator="line"
+                            className={"bg-black"}
+                        />
+                    }
                 />
                 <Area
                     dataKey="mmHg"
@@ -67,7 +72,7 @@ export function OxygenChart() {
                 />
             </AreaChart>
         </ChartContainer>
-    )
+    );
 }
 
 const co2ChartData = [
@@ -77,14 +82,14 @@ const co2ChartData = [
     { day: "Friday", ppm: Math.random() * (600 - 400) + 400 },
     { day: "Saturday", ppm: Math.random() * (600 - 400) + 400 },
     { day: "Sunday", ppm: Math.random() * (600 - 400) + 400 },
-]
+];
 
 const co2ChartConfig = {
     ppm: {
         label: "ppm",
         color: "blue",
     },
-}
+};
 
 export function CO2Chart() {
     return (
@@ -107,7 +112,12 @@ export function CO2Chart() {
                 />
                 <ChartTooltip
                     cursor={false}
-                    content={<ChartTooltipContent indicator="line" className={"bg-black"} />}
+                    content={
+                        <ChartTooltipContent
+                            indicator="line"
+                            className={"bg-black"}
+                        />
+                    }
                 />
                 <Area
                     dataKey="ppm"
@@ -118,7 +128,7 @@ export function CO2Chart() {
                 />
             </AreaChart>
         </ChartContainer>
-    )
+    );
 }
 
 const pChartData = [
@@ -128,14 +138,14 @@ const pChartData = [
     { day: "Friday", kPa: Math.random() * (98 - 80) + 80 },
     { day: "Saturday", kPa: Math.random() * (98 - 80) + 80 },
     { day: "Sunday", kPa: Math.random() * (98 - 80) + 80 },
-]
+];
 
 const pChartConfig = {
     kPa: {
         label: "kPa",
         color: "blue",
     },
-}
+};
 
 export function PChart() {
     return (
@@ -158,7 +168,12 @@ export function PChart() {
                 />
                 <ChartTooltip
                     cursor={false}
-                    content={<ChartTooltipContent indicator="line" className={"bg-black"} />}
+                    content={
+                        <ChartTooltipContent
+                            indicator="line"
+                            className={"bg-black"}
+                        />
+                    }
                 />
                 <Area
                     dataKey="kPa"
@@ -169,7 +184,7 @@ export function PChart() {
                 />
             </AreaChart>
         </ChartContainer>
-    )
+    );
 }
 
 const fuelChartData = [
@@ -182,7 +197,7 @@ const fuelChartConfig = {
     },
     safari: {
         label: "Safari",
-        color: "blue",
+        color: "hsl(var(--chart-2))",
     },
 };
 
@@ -196,7 +211,7 @@ const batteryChartConfig = {
     },
     safari: {
         label: "Safari",
-        color: "blue",
+        color: "hsl(var(--chart-2))",
     },
 };
 
@@ -210,17 +225,14 @@ const powerChartConfig = {
     },
     safari: {
         label: "Safari",
-        color: "blue",
+        color: "hsl(var(--chart-2))",
     },
 };
 
 export function FuelChart() {
     return (
-        <div style={{ width: '100%', height: '250px' }}>
-            <ChartContainer
-                config={fuelChartConfig}
-                className="h-full w-full"
-            >
+        <div style={{ width: "100%", height: "250px" }}>
+            <ChartContainer config={fuelChartConfig} className="h-full w-full">
                 <RadialBarChart
                     data={fuelChartData}
                     startAngle={0}
@@ -235,11 +247,23 @@ export function FuelChart() {
                         className="first:fill-muted last:fill-background"
                         polarRadius={[86, 74]}
                     />
-                    <RadialBar dataKey="visitors" background cornerRadius={10} />
-                    <PolarRadiusAxis tick={false} tickLine={false} axisLine={false}>
+                    <RadialBar
+                        dataKey="visitors"
+                        background
+                        cornerRadius={10}
+                    />
+                    <PolarRadiusAxis
+                        tick={false}
+                        tickLine={false}
+                        axisLine={false}
+                    >
                         <Label
                             content={({ viewBox }) => {
-                                if (viewBox && "cx" in viewBox && "cy" in viewBox) {
+                                if (
+                                    viewBox &&
+                                    "cx" in viewBox &&
+                                    "cy" in viewBox
+                                ) {
                                     return (
                                         <text
                                             x={viewBox.cx}
@@ -275,7 +299,7 @@ export function FuelChart() {
 
 export function BatteryChart() {
     return (
-        <div style={{ width: '100%', height: '250px' }}>
+        <div style={{ width: "100%", height: "250px" }}>
             <ChartContainer
                 config={batteryChartConfig}
                 className="h-full w-full"
@@ -294,11 +318,23 @@ export function BatteryChart() {
                         className="first:fill-muted last:fill-background"
                         polarRadius={[86, 74]}
                     />
-                    <RadialBar dataKey="visitors" background cornerRadius={10} />
-                    <PolarRadiusAxis tick={false} tickLine={false} axisLine={false}>
+                    <RadialBar
+                        dataKey="visitors"
+                        background
+                        cornerRadius={10}
+                    />
+                    <PolarRadiusAxis
+                        tick={false}
+                        tickLine={false}
+                        axisLine={false}
+                    >
                         <Label
                             content={({ viewBox }) => {
-                                if (viewBox && "cx" in viewBox && "cy" in viewBox) {
+                                if (
+                                    viewBox &&
+                                    "cx" in viewBox &&
+                                    "cy" in viewBox
+                                ) {
                                     return (
                                         <text
                                             x={viewBox.cx}
@@ -334,11 +370,8 @@ export function BatteryChart() {
 
 export function PowerChart() {
     return (
-        <div style={{ width: '100%', height: '250px' }}>
-            <ChartContainer
-                config={powerChartConfig}
-                className="h-full w-full"
-            >
+        <div style={{ width: "100%", height: "250px" }}>
+            <ChartContainer config={powerChartConfig} className="h-full w-full">
                 <RadialBarChart
                     data={powerChartData}
                     startAngle={0}
@@ -353,11 +386,23 @@ export function PowerChart() {
                         className="first:fill-muted last:fill-background"
                         polarRadius={[86, 74]}
                     />
-                    <RadialBar dataKey="visitors" background cornerRadius={10} />
-                    <PolarRadiusAxis tick={false} tickLine={false} axisLine={false}>
+                    <RadialBar
+                        dataKey="visitors"
+                        background
+                        cornerRadius={10}
+                    />
+                    <PolarRadiusAxis
+                        tick={false}
+                        tickLine={false}
+                        axisLine={false}
+                    >
                         <Label
                             content={({ viewBox }) => {
-                                if (viewBox && "cx" in viewBox && "cy" in viewBox) {
+                                if (
+                                    viewBox &&
+                                    "cx" in viewBox &&
+                                    "cy" in viewBox
+                                ) {
                                     return (
                                         <text
                                             x={viewBox.cx}
@@ -398,7 +443,7 @@ const tempChartData = [
     { month: "Friday", desktop: Math.random() * (77 - 66) + 66 },
     { month: "Saturday", desktop: Math.random() * (77 - 66) + 66 },
     { month: "Sunday", desktop: Math.random() * (77 - 66) + 66 },
-]
+];
 const tempChartConfig = {
     desktop: {
         label: "Degrees °F",
@@ -408,51 +453,49 @@ const tempChartConfig = {
         label: "Mobile",
         color: "hsl(var(--chart-2))",
     },
-}
+};
 export function TemperatureChart() {
     return (
-                <ChartContainer config={tempChartConfig}>
-                    <LineChart
-                        accessibilityLayer
-                        data={tempChartData}
-                        margin={{
-                            top: 20,
-                            left: 12,
-                            right: 12,
-                        }}
-                    >
-                        <CartesianGrid vertical={false} />
-                        <XAxis
-                            dataKey="month"
-                            tickLine={false}
-                            axisLine={false}
-                            tickMargin={8}
-                            tickFormatter={(value) => value.slice(0, 3)}
+        <ChartContainer config={tempChartConfig}>
+            <LineChart
+                accessibilityLayer
+                data={tempChartData}
+                margin={{
+                    top: 20,
+                    left: 12,
+                    right: 12,
+                }}
+            >
+                <CartesianGrid vertical={false} />
+                <XAxis
+                    dataKey="month"
+                    tickLine={false}
+                    axisLine={false}
+                    tickMargin={8}
+                    tickFormatter={(value) => value.slice(0, 3)}
+                />
+                <ChartTooltip
+                    cursor={false}
+                    content={
+                        <ChartTooltipContent
+                            indicator="line"
+                            className={"bg-black"}
                         />
-                        <ChartTooltip
-                            cursor={false}
-                            content={<ChartTooltipContent indicator="line" className={"bg-black"} />}
-                        />
-                        <Line
-                            dataKey="desktop"
-                            type="natural"
-                            stroke="var(--color-desktop)"
-                            strokeWidth={2}
-                            dot={{
-                                fill: "var(--color-desktop)",
-                            }}
-                            activeDot={{
-                                r: 6,
-                            }}
-                        >
-                            <LabelList
-                                position="top"
-                                offset={12}
-                                className="fill-foreground"
-                                fontSize={12}
-                            />
-                        </Line>
-                    </LineChart>
-                </ChartContainer>
-    )
+                    }
+                />
+                <Line
+                    dataKey="desktop"
+                    type="natural"
+                    stroke="var(--color-desktop)"
+                    strokeWidth={2}
+                    dot={{
+                        fill: "var(--color-desktop)",
+                    }}
+                    activeDot={{
+                        r: 6,
+                    }}
+                ></Line>
+            </LineChart>
+        </ChartContainer>
+    );
 }

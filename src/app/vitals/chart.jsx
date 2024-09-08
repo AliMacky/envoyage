@@ -80,14 +80,7 @@ export function BloodOChart() {
                     activeDot={{
                         r: 6,
                     }}
-                >
-                    <LabelList
-                        position="top"
-                        offset={12}
-                        className="fill-foreground"
-                        fontSize={12}
-                    />
-                </Line>
+                ></Line>
             </LineChart>
         </ChartContainer>
     );
@@ -149,14 +142,7 @@ export function BodyTempChart() {
                     activeDot={{
                         r: 6,
                     }}
-                >
-                    <LabelList
-                        position="top"
-                        offset={12}
-                        className="fill-foreground"
-                        fontSize={12}
-                    />
-                </Line>
+                ></Line>
             </LineChart>
         </ChartContainer>
     );
