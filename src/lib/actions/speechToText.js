@@ -1,25 +1,39 @@
-const speech = require('@google-cloud/speech')
-import fs from 'fs'
+"use server"
 
-export async function transcribeAudio(audioFile) {
-    try {
-        const speechClient = new speech.SpeechClient()
-        const file = fs.readFileSync(audioFile)
-        const audioBytes = file.toString('base64')
+// const fs = require('fs');
 
-        const audio = {
-            content: audioBytes,
-        }
-        const config = {
-            encoding: 'LINEAR16',
-            sampleRateHertz: 44100,
-            languageCode: "en-US"
-        }
+export async function transcribeAudio() {
 
-        const text = await speechClient.recognize({audio, config})
-        console.log(test)
-        return text
-    } catch (error) {
-        console.log("ERROR: " + error)
-    }
+
+    // const filename = '/test.m4a';
+    // const encoding = 'AAC'; // Use 'MP3', 'AAC' or 'OGG_OPUS' if .m4a format
+    // const sampleRateHertz = 48000;
+    // const languageCode = 'en-US';
+    //
+    // const config = {
+    //     encoding: encoding,
+    //     sampleRateHertz: sampleRateHertz, // Be sure this matches your audio file's sample rate
+    //     languageCode: languageCode,
+    //     enableAutomaticPunctuation: true,
+    // };
+    //
+    // const audio = {
+    //     content: fs.readFileSync(filename).toString('base64'),
+    // };
+    //
+    // const request = {
+    //     config: config,
+    //     audio: audio,
+    // };
+    //
+    // try {
+    //     // Detects speech in the audio file
+    //     const [response] = await client.recognize(request);
+    //     const transcription = response.results
+    //         .map(result => result.alternatives[0].transcript)
+    //         .join('\n');
+    //     console.log('Transcription: ', transcription);
+    // } catch (err) {
+    //     console.error('ERROR:', err);
+    // }
 }

@@ -2,29 +2,28 @@
 import {createClient} from "@/lib/supabase/client";
 import {useEffect, useState} from "react";
 import {sendMessage} from "@/lib/actions/sendMessage";
-import {translateText} from "@/lib/actions/translate";
+import {ArrowRightIcon} from "lucide-react"
+import {AnimatePresence, motion} from "framer-motion";
 
-export function Chat({chatId, history, uid}) {
+export function Chat({chatId, history, uid, affiliation, role}) {
     const [messages, setMessages] = useState([])
     const [inputMessage, setInputMessage] = useState("");
+    const [translatedText, setTranslatedText] = useState("");
     const supabase = createClient()
 
-    console.log(translateText("Лукас крутой", "us"))
 
     const handleInserts = (payload) => {
         setMessages(payload.new.messages)
     }
 
     const handleSubmit = (e) => {
-        e.preventDefault()
-        sendMessage(chatId, inputMessage, uid, messages)
+        e.preventDefault();
+        setInputMessage("");
+        sendMessage(chatId, inputMessage, uid, messages, affiliation);
     }
 
     useEffect(() => {
         setMessages(history)
-    }, []);
-
-    useEffect(() => {
         const channel = supabase
             .channel(`room_${chatId}`)
             .on(
@@ -43,18 +42,108 @@ export function Chat({chatId, history, uid}) {
         };
     }, [])
 
+    const [showLanding, setShowLanding] = useState(false);
+
     return (
-        <div>
-            {messages.map((msg, index) => (
-                <div key={index} className="flex flex-row">
-                    <p className="font-bold text-white">{msg.uid}</p>: {msg.message}
+        <div className="h-full rounded-lg flex flex-col sm:flex-row flex-1">
+            <div className="flex flex-1 p-10 flex-col gap-2 h-full overflow-hidden">
+                <div className="flex flex-col gap-4 flex-1 mt-6 md:mx-44 overflow-y-auto pr-4 mb-4">
+                    {!showLanding &&
+                        messages.map((msg, i) =>
+                            msg.uid !== uid ? (
+                                (<motion.div
+                                        key={`${msg.id}-user-${i}`}
+                                        initial={{opacity: 0.0, y: 40}}
+                                        animate={{opacity: 1, y: 0}}
+                                        transition={{
+                                            type: "spring",
+                                            duration: 0.6,
+                                        }}
+                                        className="min-w-0 leading-relaxed break-words self-start px-4 py-1.5 bg-zinc-800 border-2 border-zinc-700 rounded-lg"
+                                    >
+                                        {
+                                            affiliation === "USA" ?
+                                                msg.messages.en : affiliation === "RUS" ?
+                                                    msg.messages.ru : msg.messages.zh
+                                        }
+                                    </motion.div>
+                                )
+                            ) : (
+                                <motion.div
+                                    key={`${msg.id}-user-${i}`}
+                                    initial={{opacity: 0.0, y: 40}}
+                                    animate={{opacity: 1, y: 0}}
+                                    transition={{
+                                        type: "spring",
+                                        duration: 0.6,
+                                    }}
+                                    className="min-w-0 leading-relaxed break-words self-end px-4 py-1.5 bg-zinc-800 border-2 border-zinc-700 rounded-lg"
+                                >
+                                    {
+                                        affiliation === "USA" ?
+                                            msg.messages.en : affiliation === "RUS" ?
+                                                msg.messages.ru : msg.messages.zh
+                                    }
+                                </motion.div>
+                            )
+                        )}
                 </div>
-            ))}
-            <form onSubmit={handleSubmit}>
-                <input type="text" placeholder="Message" value={inputMessage}
-                       onChange={(e) => setInputMessage(e.target.value)}/>
-                <button type="submit">Submit</button>
-            </form>
+                <AnimatePresence>
+                    {showLanding && (
+                        <motion.div
+                            key="logo"
+                            initial={{opacity: 0}}
+                            animate={{opacity: 1}}
+                            exit={{opacity: 0}}
+                            className="flex flex-1 justify-center items-center mb-20"
+                        >
+                            <Image
+                                src="/logo.svg"
+                                alt="Archibald AI Logo"
+                                width={70}
+                                height={70}
+                            />
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+                <AnimatePresence>
+                    {showLanding && (
+                        <motion.div
+                            key="suggestions"
+                            initial={{opacity: 0.0, y: 40}}
+                            animate={{opacity: 1, y: 0}}
+                            exit={{opacity: 0}}
+                            transition={{
+                                delay: 0.1,
+                                duration: 0.5,
+                                ease: "easeInOut",
+                            }}
+                            className="grid grid-cols-2 gap-4 mb-6 md:mx-44 mx-none"
+                        >
+                            hey girls
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+                <form
+                    className="flex relative justify-center md:mx-44 mx-none"
+                    onSubmit={handleSubmit}
+                >
+                    <input
+                        type="text"
+                        placeholder="Type your message here"
+                        className="rounded-lg w-full pl-5 py-4 bg-zinc-800 outline-2 outline-zinc-600 pr-36 resize-none overflow-hidden h-auto"
+                        value={inputMessage}
+                        onChange={(e) => setInputMessage(e.target.value)}
+                    />
+                    <button
+                        type="submit"
+                        disabled={inputMessage === ""}
+                        className="absolute top-1/2 -right-1 transform -translate-x-1/2 -translate-y-1/2 bg-zinc-400 rounded-lg text-black p-2 hover:bg-zinc-500 disabled:bg-zinc-600 transition ease-in-out duration-300"
+                    >
+                        <ArrowRightIcon size={20}/>
+                    </button>
+                </form>
+            </div>
         </div>
     );
 }

@@ -12,6 +12,7 @@ export const metadata = {
 };
 
 export default function RootLayout({children}) {
+
     return (
         <html lang="en" suppressHydrationWarning>
             <body
@@ -22,8 +23,6 @@ export default function RootLayout({children}) {
             >
                 <ThemeProvider
                     attribute="class"
-                    defaultTheme="dark"
-                    enableSystem
                     disableTransitionOnChange
                 >
                     {children}

@@ -19,28 +19,28 @@ import {
 
 export const description = "A simple area chart"
 
-const chartData = [
-    { month: "January", desktop: 186 },
-    { month: "February", desktop: 305 },
-    { month: "March", desktop: 237 },
-    { month: "April", desktop: 73 },
-    { month: "May", desktop: 209 },
-    { month: "June", desktop: 214 },
+const oxygenChartData = [
+    { day: "Tuesday", mmHg: 80 },
+    { day: "Wednesday", mmHg: 72 },
+    { day: "Thursday", mmHg: 83 },
+    { day: "Friday", mmHg: 67 },
+    { day: "Saturday", mmHg: 78 },
+    { day: "Sunday", mmHg: 91 },
 ]
 
-const chartConfig = {
-    desktop: {
-        label: "Desktop",
-        color: "hsl(var(--chart-1))",
+const oxygenChartConfig = {
+    mmHg: {
+        label: "mmHg",
+        color: "blue",
     },
 }
 
 export function OxygenChart() {
     return (
-        <ChartContainer config={chartConfig}>
+        <ChartContainer config={oxygenChartConfig}>
             <AreaChart
                 accessibilityLayer
-                data={chartData}
+                data={oxygenChartData}
                 margin={{
                     left: 12,
                     right: 12,
@@ -48,7 +48,7 @@ export function OxygenChart() {
             >
                 <CartesianGrid vertical={false} />
                 <XAxis
-                    dataKey="month"
+                    dataKey="day"
                     tickLine={false}
                     axisLine={false}
                     tickMargin={8}
@@ -56,31 +56,161 @@ export function OxygenChart() {
                 />
                 <ChartTooltip
                     cursor={false}
-                    content={<ChartTooltipContent indicator="line" className={"bg-white"} />}
+                    content={<ChartTooltipContent indicator="line" className={"bg-black"} />}
                 />
                 <Area
-                    dataKey="desktop"
+                    dataKey="mmHg"
                     type="natural"
-                    fill="var(--color-desktop)"
+                    fill="blue"
                     fillOpacity={0.4}
-                    stroke="var(--color-desktop)"
+                    stroke="blue"
                 />
             </AreaChart>
         </ChartContainer>
     )
 }
 
-const chartData2 = [
-    { browser: "safari", visitors: 200, fill: "var(--color-safari)" },
+const co2ChartData = [
+    { day: "Tuesday", ppm: 510 },
+    { day: "Wednesday", ppm: 789 },
+    { day: "Thursday", ppm: 432 },
+    { day: "Friday", ppm: 499 },
+    { day: "Saturday", ppm: 532 },
+    { day: "Sunday", ppm: 422 },
+]
+
+const co2ChartConfig = {
+    ppm: {
+        label: "ppm",
+        color: "blue",
+    },
+}
+
+export function CO2Chart() {
+    return (
+        <ChartContainer config={co2ChartConfig}>
+            <AreaChart
+                accessibilityLayer
+                data={co2ChartData}
+                margin={{
+                    left: 12,
+                    right: 12,
+                }}
+            >
+                <CartesianGrid vertical={false} />
+                <XAxis
+                    dataKey="day"
+                    tickLine={false}
+                    axisLine={false}
+                    tickMargin={8}
+                    tickFormatter={(value) => value.slice(0, 3)}
+                />
+                <ChartTooltip
+                    cursor={false}
+                    content={<ChartTooltipContent indicator="line" className={"bg-black"} />}
+                />
+                <Area
+                    dataKey="ppm"
+                    type="natural"
+                    fill="blue"
+                    fillOpacity={0.4}
+                    stroke="blue"
+                />
+            </AreaChart>
+        </ChartContainer>
+    )
+}
+
+const pChartData = [
+    { day: "Tuesday", kPa: 97 },
+    { day: "Wednesday", kPa: 88 },
+    { day: "Thursday", kPa: 85 },
+    { day: "Friday", kPa: 79 },
+    { day: "Saturday", kPa: 87 },
+    { day: "Sunday", kPa: 92 },
+]
+
+const pChartConfig = {
+    kPa: {
+        label: "kPa",
+        color: "blue",
+    },
+}
+
+export function PChart() {
+    return (
+        <ChartContainer config={pChartConfig}>
+            <AreaChart
+                accessibilityLayer
+                data={pChartData}
+                margin={{
+                    left: 12,
+                    right: 12,
+                }}
+            >
+                <CartesianGrid vertical={false} />
+                <XAxis
+                    dataKey="day"
+                    tickLine={false}
+                    axisLine={false}
+                    tickMargin={8}
+                    tickFormatter={(value) => value.slice(0, 3)}
+                />
+                <ChartTooltip
+                    cursor={false}
+                    content={<ChartTooltipContent indicator="line" className={"bg-black"} />}
+                />
+                <Area
+                    dataKey="kPa"
+                    type="natural"
+                    fill="blue"
+                    fillOpacity={0.4}
+                    stroke="blue"
+                />
+            </AreaChart>
+        </ChartContainer>
+    )
+}
+
+const fuelChartData = [
+    { browser: "safari", visitors: 247, fill: "var(--color-safari)" },
 ];
 
-const chartConfig2 = {
+const fuelChartConfig = {
     visitors: {
         label: "Visitors",
     },
     safari: {
         label: "Safari",
-        color: "hsl(var(--chart-2))",
+        color: "blue",
+    },
+};
+
+const batteryChartData = [
+    { browser: "safari", visitors: 97, fill: "var(--color-safari)" },
+];
+
+const batteryChartConfig = {
+    visitors: {
+        label: "Visitors",
+    },
+    safari: {
+        label: "Safari",
+        color: "blue",
+    },
+};
+
+const powerChartData = [
+    { browser: "safari", visitors: 887, fill: "var(--color-safari)" },
+];
+
+const powerChartConfig = {
+    visitors: {
+        label: "Visitors",
+    },
+    safari: {
+        label: "Safari",
+        color: "blue",
     },
 };
 
@@ -88,11 +218,11 @@ export function FuelChart() {
     return (
         <div style={{ width: '100%', height: '250px' }}>
             <ChartContainer
-                config={chartConfig2}
+                config={fuelChartConfig}
                 className="h-full w-full"
             >
                 <RadialBarChart
-                    data={chartData2}
+                    data={fuelChartData}
                     startAngle={0}
                     endAngle={250}
                     innerRadius={80}
@@ -122,7 +252,7 @@ export function FuelChart() {
                                                 y={viewBox.cy}
                                                 className="fill-white text-4xl font-bold"
                                             >
-                                                {chartData2[0].visitors.toLocaleString()}
+                                                {fuelChartData[0].visitors.toLocaleString()}
                                             </tspan>
                                             <tspan
                                                 x={viewBox.cx}
@@ -143,17 +273,135 @@ export function FuelChart() {
     );
 }
 
-const chartData3 = [
-    { month: "January", desktop: 186, mobile: 80 },
-    { month: "February", desktop: 305, mobile: 200 },
-    { month: "March", desktop: 237, mobile: 120 },
-    { month: "April", desktop: 73, mobile: 190 },
-    { month: "May", desktop: 209, mobile: 130 },
-    { month: "June", desktop: 214, mobile: 140 },
+export function BatteryChart() {
+    return (
+        <div style={{ width: '100%', height: '250px' }}>
+            <ChartContainer
+                config={batteryChartConfig}
+                className="h-full w-full"
+            >
+                <RadialBarChart
+                    data={batteryChartData}
+                    startAngle={0}
+                    endAngle={350}
+                    innerRadius={80}
+                    outerRadius={110}
+                >
+                    <PolarGrid
+                        gridType="circle"
+                        radialLines={false}
+                        stroke="none"
+                        className="first:fill-muted last:fill-background"
+                        polarRadius={[86, 74]}
+                    />
+                    <RadialBar dataKey="visitors" background cornerRadius={10} />
+                    <PolarRadiusAxis tick={false} tickLine={false} axisLine={false}>
+                        <Label
+                            content={({ viewBox }) => {
+                                if (viewBox && "cx" in viewBox && "cy" in viewBox) {
+                                    return (
+                                        <text
+                                            x={viewBox.cx}
+                                            y={viewBox.cy}
+                                            textAnchor="middle"
+                                            dominantBaseline="middle"
+                                        >
+                                            <tspan
+                                                x={viewBox.cx}
+                                                y={viewBox.cy}
+                                                className="fill-white text-4xl font-bold"
+                                            >
+                                                {batteryChartData[0].visitors.toLocaleString()}
+                                            </tspan>
+                                            <tspan
+                                                x={viewBox.cx}
+                                                y={(viewBox.cy || 0) + 24}
+                                                className="fill-white"
+                                            >
+                                                Battery
+                                            </tspan>
+                                        </text>
+                                    );
+                                }
+                            }}
+                        />
+                    </PolarRadiusAxis>
+                </RadialBarChart>
+            </ChartContainer>
+        </div>
+    );
+}
+
+export function PowerChart() {
+    return (
+        <div style={{ width: '100%', height: '250px' }}>
+            <ChartContainer
+                config={powerChartConfig}
+                className="h-full w-full"
+            >
+                <RadialBarChart
+                    data={powerChartData}
+                    startAngle={0}
+                    endAngle={310}
+                    innerRadius={80}
+                    outerRadius={110}
+                >
+                    <PolarGrid
+                        gridType="circle"
+                        radialLines={false}
+                        stroke="none"
+                        className="first:fill-muted last:fill-background"
+                        polarRadius={[86, 74]}
+                    />
+                    <RadialBar dataKey="visitors" background cornerRadius={10} />
+                    <PolarRadiusAxis tick={false} tickLine={false} axisLine={false}>
+                        <Label
+                            content={({ viewBox }) => {
+                                if (viewBox && "cx" in viewBox && "cy" in viewBox) {
+                                    return (
+                                        <text
+                                            x={viewBox.cx}
+                                            y={viewBox.cy}
+                                            textAnchor="middle"
+                                            dominantBaseline="middle"
+                                        >
+                                            <tspan
+                                                x={viewBox.cx}
+                                                y={viewBox.cy}
+                                                className="fill-white text-4xl font-bold"
+                                            >
+                                                {powerChartData[0].visitors.toLocaleString()}
+                                            </tspan>
+                                            <tspan
+                                                x={viewBox.cx}
+                                                y={(viewBox.cy || 0) + 24}
+                                                className="fill-white"
+                                            >
+                                                Power
+                                            </tspan>
+                                        </text>
+                                    );
+                                }
+                            }}
+                        />
+                    </PolarRadiusAxis>
+                </RadialBarChart>
+            </ChartContainer>
+        </div>
+    );
+}
+
+const tempChartData = [
+    { month: "Tuesday", desktop: 77, mobile: 80 },
+    { month: "Wednesday", desktop: 72, mobile: 200 },
+    { month: "Thursday", desktop: 73, mobile: 120 },
+    { month: "Friday", desktop: 75, mobile: 190 },
+    { month: "Saturday", desktop: 67, mobile: 130 },
+    { month: "Sunday", desktop: 74, mobile: 140 },
 ]
-const chartConfig3 = {
+const tempChartConfig = {
     desktop: {
-        label: "Desktop",
+        label: "Degrees °F",
         color: "hsl(var(--chart-1))",
     },
     mobile: {
@@ -163,10 +411,10 @@ const chartConfig3 = {
 }
 export function TemperatureChart() {
     return (
-                <ChartContainer config={chartConfig3}>
+                <ChartContainer config={tempChartConfig}>
                     <LineChart
                         accessibilityLayer
-                        data={chartData3}
+                        data={tempChartData}
                         margin={{
                             top: 20,
                             left: 12,
@@ -183,7 +431,7 @@ export function TemperatureChart() {
                         />
                         <ChartTooltip
                             cursor={false}
-                            content={<ChartTooltipContent indicator="line" className={"bg-white"} />}
+                            content={<ChartTooltipContent indicator="line" className={"bg-black"} />}
                         />
                         <Line
                             dataKey="desktop"

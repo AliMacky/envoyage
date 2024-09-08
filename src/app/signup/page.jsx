@@ -41,7 +41,7 @@ export default function Home() {
         } else {
             const { error } = await supabase
                 .from('users')
-                .insert({ uid: data.user.id, chat_ids: [], affiliation: 'USA', role: 'astronaut' })
+                .insert({ uid: data.user.id, chat_ids: [], affiliation: 'USA', role: 'control', user_name: 'Don' })
             toast({
                 title: "Account created",
                 description:

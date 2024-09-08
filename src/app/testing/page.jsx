@@ -1,8 +1,11 @@
-import {transcribeAudio} from "@/lib/actions/speechToText";
+import getAstronautHealth from "@/lib/actions/astronautHealthAI";
+import Testing from "@/app/testing/testing";
 
-export default function Home() {
-    transcribeAudio('/test.m4a')
-    return (
-        <div></div>
-    )
+const Home = async () => {
+    const r = await getAstronautHealth();
+    return <div className="flex flex-col">
+        <Testing r={r}/>
+    </div>;
 }
+
+export default Home;
