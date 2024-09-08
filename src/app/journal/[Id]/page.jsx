@@ -5,8 +5,7 @@ import {Textarea} from "@/components/ui/textarea";
 
 const Home = async (Id) => {
     const id = Id.params.Id
-    const journalEntry = await getJournalEntry(id)
-    const entry = journalEntry[0]
+    const entry = await getJournalEntry(id)
 
     return (
         <div className="h-screen w-screen flex flex-row">

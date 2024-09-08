@@ -9,7 +9,6 @@ const page = async () => {
     const chatIds = await getUserChats()
     const chats = await getChatInfo(chatIds)
     
-    // Filter chats to include only astronaut chats
     const controllerChats = chats.filter(chat =>
         chat.users.every(user => user.role === 'control')
     )

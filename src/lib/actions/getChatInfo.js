@@ -7,7 +7,6 @@ export async function getChatInfo(chatIds) {
     const chatInfo = [];
 
     for (const chatId of chatIds) {
-        // Fetch chat information
         const { data: chatData, error: chatError } = await supabase
             .from('chats')
             .select('*')
@@ -19,7 +18,6 @@ export async function getChatInfo(chatIds) {
             continue;
         }
 
-        // Fetch user information for the chat
         const { data: userData, error: userError } = await supabase
             .from('users')
             .select('uid, user_name, affiliation, role')
@@ -37,5 +35,5 @@ export async function getChatInfo(chatIds) {
         });
     }
 
-    return chatInfo;
+    return chatInfo && chatInfo.length > 0 ? chatInfo : null
 }

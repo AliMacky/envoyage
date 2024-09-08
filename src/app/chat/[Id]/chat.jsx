@@ -41,7 +41,6 @@ export function Chat({ chatId, history, uid, affiliation, role }) {
 
     useEffect(() => {
 
-        // speech recognition configuration
         if (!("webkitSpeechRecognition" in window)) {
             alert("Your browser does not support speech recognition.");
             return;
@@ -53,7 +52,7 @@ export function Chat({ chatId, history, uid, affiliation, role }) {
 
         recognitionInstance.continuous = true;
         recognitionInstance.interimResults = true;
-        recognitionInstance.lang = "en-US"; // Change language as needed
+        recognitionInstance.lang = "en-US";
 
         recognitionInstance.onresult = (event) => {
             let interimTranscript = "";
