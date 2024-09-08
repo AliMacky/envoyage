@@ -30,7 +30,7 @@ const page = async (Id) => {
                     Vitals
                 </div>
                 <div className="text-sm text-white flex gap-1 items-center my-2">
-                    Track {astronaut.user_name}'s most important vitals.
+                    Track {astronaut.user_name}&apos;s most important vitals.
                 </div>
                 <div className={"mt-4"}>
                     <div className={"grid grid-cols-3 gap-4"}>
