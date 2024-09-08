@@ -6,10 +6,14 @@ import { Component } from "./radar";
 import { PressureChart } from "./pressure";
 import { NumberTicker } from "@/components/ui/number-ticker.jsx";
 import getSpecificUserData from "@/lib/actions/getSpecificUserData";
+import Astronauts from "./astronauts";
+import { getJournalEntries } from "@/lib/actions/getJournalEntries";
 
-const page = async(Id) => {
-    const id = Id.params.Id
-    const astronaut = await getSpecificUserData(id)
+const page = async (Id) => {
+    const id = Id.params.Id;
+    const astronaut = await getSpecificUserData(id);
+    const journals = await getJournalEntries(id);
+
     return (
         <div className="h-screen w-screen flex flex-row">
             <div className="flex flex-col h-full">
@@ -19,10 +23,11 @@ const page = async(Id) => {
                 <div
                     className={"text-sm text-gray-500 flex gap-1 items-center"}
                 >
-                    Envoyage <ChevronRight size={15} /> Health  <ChevronRight size={15} /> {id}
+                    Envoyage <ChevronRight size={15} /> Vitals{" "}
+                    <ChevronRight size={15} /> {id}
                 </div>
                 <div className={"font-semibold text-4xl tracking-tight mt-2"}>
-                    Health
+                    Vitals
                 </div>
                 <div className="text-sm text-white flex gap-1 items-center my-2">
                     Track {astronaut.user_name}'s most important vitals.
@@ -57,7 +62,7 @@ const page = async(Id) => {
                         </div>
                         <div className="border rounded-lg flex flex-col overflow-hidden">
                             <div className="bg-zinc-900 text-white px-4 py-1 text-lg font-semibold">
-                                Heart Rate
+                                HEART RATE
                             </div>
                             <div className={"py-2 px-4 flex flex-col h-full"}>
                                 <div className="my-2 text-sm text-gray-500 pb-2">
@@ -65,14 +70,14 @@ const page = async(Id) => {
                                 </div>
                                 <div className="flex flex-1 justify-center items-center flex-col">
                                     <NumberTicker
-                                        value={Math.random() * (100 - 60) + 60 }
+                                        value={Math.random() * (100 - 60) + 60}
                                         className={"text-red-400 text-8xl"}
                                     />
                                     <div className="text-4xl">BPM</div>
                                 </div>
                             </div>
                         </div>
-                        <div className="border rounded-lg flex flex-col overflow-hidden col-span-2">
+                        <div className="border rounded-lg flex flex-col overflow-hidden">
                             <div className="bg-zinc-900 text-white px-4 py-1 text-lg font-semibold">
                                 CONDITION
                             </div>
@@ -81,6 +86,17 @@ const page = async(Id) => {
                                     Track your condition
                                 </div>
                                 <Component />
+                            </div>
+                        </div>
+                        <div className="border rounded-lg flex flex-col overflow-hidden">
+                            <div className="bg-zinc-900 text-white px-4 py-1 text-lg font-semibold">
+                                MENTAL HEALTH
+                            </div>
+                            <div className={"py-2 px-4 relative"}>
+                                <div className="my-2 text-sm text-gray-500 pb-2">
+                                    Track your condition
+                                </div>
+                                <Astronauts journals={journals} />
                             </div>
                         </div>
                         <div

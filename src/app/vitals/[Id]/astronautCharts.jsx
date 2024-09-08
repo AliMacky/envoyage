@@ -1,8 +1,14 @@
 "use client";
 
-import {Label, PolarGrid, PolarRadiusAxis, RadialBar, RadialBarChart,} from "recharts";
-import {ChartContainer} from "@/components/ui/chart";
-import {useEffect} from "react";
+import {
+    Label,
+    PolarGrid,
+    PolarRadiusAxis,
+    RadialBar,
+    RadialBarChart,
+} from "recharts";
+import { ChartContainer } from "@/components/ui/chart";
+import { useEffect } from "react";
 
 const healthChartConfig = {
     score: {
@@ -15,7 +21,7 @@ const healthChartConfig = {
     },
 };
 
-export function AstronautHealthChart({status}) {
+export function AstronautHealthChart({ status }) {
     // const [healthData, setHealthData] = useState([]);
 
     // useEffect(() => {
@@ -43,10 +49,10 @@ export function AstronautHealthChart({status}) {
 
     return (
         <div className="flex flex-1">
-            <div className="flex flex-col gap-4 justify-center items-center text-center max-h-[400px] w-[200px]">
-                <ChartContainer config={healthChartConfig} className="h-[80%] w-full">
+            <div className="flex flex-col justify-center items-center text-center h-[25vh] -ml-6 -mt-8">
+                <ChartContainer config={healthChartConfig} className="h-full">
                     <RadialBarChart
-                        data={[{score: latestScore}]}
+                        data={[{ score: latestScore }]}
                         startAngle={0}
                         endAngle={latestScore * (360 / 100)}
                         innerRadius={80}
@@ -74,8 +80,12 @@ export function AstronautHealthChart({status}) {
                             domain={[0, 100]}
                         >
                             <Label
-                                content={({viewBox}) => {
-                                    if (viewBox && "cx" in viewBox && "cy" in viewBox) {
+                                content={({ viewBox }) => {
+                                    if (
+                                        viewBox &&
+                                        "cx" in viewBox &&
+                                        "cy" in viewBox
+                                    ) {
                                         return (
                                             <text
                                                 x={viewBox.cx}
@@ -105,18 +115,13 @@ export function AstronautHealthChart({status}) {
                         </PolarRadiusAxis>
                     </RadialBarChart>
                 </ChartContainer>
-                <div>
-                    <p className="text-sm">
-                        {status.justifications || "No data available"}
-                    </p>
-                </div>
             </div>
         </div>
     );
 }
 
 const chartData = [
-    {browser: "safari", visitors: 200, fill: "var(--color-safari)"},
+    { browser: "safari", visitors: 200, fill: "var(--color-safari)" },
 ];
 const chartConfig = {
     visitors: {
@@ -131,10 +136,7 @@ const chartConfig = {
 export function Component() {
     return (
         <div className="flex flex-col flex-1">
-            <ChartContainer
-                config={chartConfig}
-                className="mx-auto aspect-square max-h-[250px]"
-            >
+            <ChartContainer config={chartConfig} className="mx-auto">
                 <RadialBarChart
                     data={chartData}
                     startAngle={0}
@@ -149,11 +151,23 @@ export function Component() {
                         className="first:fill-muted last:fill-background"
                         polarRadius={[86, 74]}
                     />
-                    <RadialBar dataKey="visitors" background cornerRadius={10}/>
-                    <PolarRadiusAxis tick={false} tickLine={false} axisLine={false}>
+                    <RadialBar
+                        dataKey="visitors"
+                        background
+                        cornerRadius={10}
+                    />
+                    <PolarRadiusAxis
+                        tick={false}
+                        tickLine={false}
+                        axisLine={false}
+                    >
                         <Label
-                            content={({viewBox}) => {
-                                if (viewBox && "cx" in viewBox && "cy" in viewBox) {
+                            content={({ viewBox }) => {
+                                if (
+                                    viewBox &&
+                                    "cx" in viewBox &&
+                                    "cy" in viewBox
+                                ) {
                                     return (
                                         <text
                                             x={viewBox.cx}
