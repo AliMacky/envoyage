@@ -16,28 +16,27 @@ const Astronauts = ({ journals }) => {
         setStatus(await getAstronautHealth(journals?.at(-1).content));
     };
     return (
-        <div className={"flex flex-1 flex-row h-full mx-auto"}>
-            <div className="-mt-2">
+        <div className={"flex flex-1 flex-row h-full w-full mx-auto"}>
+            <div className="">
                 {status && <AstronautHealthChart status={status} />}
                 {status && (
-                    <div className="-mt-4 ">
+                    <button className="-mt-4 w-full flex justify-center items-center">
                         <TooltipProvider>
                             <Tooltip>
-                                <TooltipTrigger asChild>
-                                    <p className="text-xs text-center max-w-sm truncate border p-2 rounded-md">
-                                        {status?.justifications ||
-                                            "No data available"}
-                                    </p>
+                                <TooltipTrigger className="flex w-fit mr-6" asChild>
+                                    <button className="text-xs max-w-sm truncate border px-2 py-1 rounded-md">
+                                        {status?.justifications ? "More" :  "No data available"}
+                                    </button>
                                 </TooltipTrigger>
                                 <TooltipContent>
-                                    <p>
+                                    <p className="max-w-[30vh]">
                                         {status?.justifications ||
                                             "No data available"}
                                     </p>
                                 </TooltipContent>
                             </Tooltip>
                         </TooltipProvider>
-                    </div>
+                    </button>
                 )}
             </div>
             <button

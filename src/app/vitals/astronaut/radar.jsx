@@ -25,7 +25,7 @@ const chartData = [
     { month: "Glucose Levels", desktop: Math.random() * (300 - 200) + 200 },
     { month: "Hydration", desktop: Math.random() * (300 - 200) + 200 },
     { month: "Muscle Activity", desktop: Math.random() * (300 - 200) + 200 },
-    { month: "Cog. Reaction Time", desktop: Math.random() * (300 - 200) + 200 },
+    { month: "C. React Time", desktop: Math.random() * (300 - 200) + 200 },
     { month: "Stress Levels", desktop: Math.random() * (300 - 200) + 100 },
 ];
 

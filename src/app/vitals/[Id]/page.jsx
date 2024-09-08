@@ -94,7 +94,7 @@ const page = async (Id) => {
                             </div>
                             <div className={"py-2 px-4 relative"}>
                                 <div className="my-2 text-sm text-gray-500 pb-2">
-                                    Track your condition
+                                    Track condition
                                 </div>
                                 <Astronauts journals={journals} />
                             </div>

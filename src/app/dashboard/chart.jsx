@@ -41,7 +41,7 @@ const OxygenTooltip = ({ active, payload, label }) => {
     const mmHg = payload[0].value;
     const isAnomalous = isOxygenAnomaly(mmHg);
     return (
-      <div className="bg-white p-2 border border-gray-300 rounded shadow">
+      <div className="bg-zinc-800 p-2 border border-zinc-700 rounded shadow">
         <p
           className={`text-sm ${
             isAnomalous ? "text-red-500" : "text-blue-500"
@@ -115,7 +115,7 @@ const CO2Tooltip = ({ active, payload, label }) => {
     const ppm = payload[0].value;
     const isAnomalous = isCO2Anomaly(ppm);
     return (
-      <div className="bg-white p-2 border border-gray-300 rounded shadow">
+      <div className="bg-zinc-800 p-2 border border-zinc-700 rounded shadow">
         <p
           className={`text-sm ${
             isAnomalous ? "text-red-500" : "text-blue-500"
@@ -194,7 +194,7 @@ const PTooltip = ({ active, payload, label }) => {
     const kPa = payload[0].value;
     const isAnomalous = isPAnomaly(kPa);
     return (
-      <div className="bg-white p-2 border border-gray-300 rounded shadow">
+      <div className="bg-zinc-800 p-2 border border-zinc-700 rounded shadow">
         <p
           className={`text-sm ${
             isAnomalous ? "text-red-500" : "text-blue-500"
@@ -483,13 +483,13 @@ const TempTooltip = ({ active, payload, label }) => {
     const temp = payload[0].value;
     const isAnomalous = isTempAnomaly(temp);
     return (
-      <div className="bg-white p-2 border border-gray-300 rounded shadow">
+      <div className="bg-zinc-800 p-2 border border-zinc-700 rounded shadow">
         <p
           className={`text-sm ${
             isAnomalous ? "text-red-500" : "text-blue-500"
           }`}
         >
-          <span className="font-bold">temp: </span> {temp.toFixed(2)} temp
+          <span className="font-bold">Temp: </span> {temp.toFixed(2)} temp
         </p>
         {isAnomalous && (
           <p className="text-xs text-red-500">Anomaly detected</p>
