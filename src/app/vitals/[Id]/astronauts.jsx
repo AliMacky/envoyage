@@ -24,13 +24,13 @@ const Astronauts = ({ journals }) => {
                         <Tooltip>
                             <TooltipTrigger asChild>
                                 <p className="text-xs text-center max-w-sm truncate border p-2 rounded-md">
-                                    {status.justifications ||
+                                    {status?.justifications ||
                                         "No data available"}
                                 </p>
                             </TooltipTrigger>
                             <TooltipContent>
                                 <p>
-                                    {status.justifications ||
+                                    {status?.justifications ||
                                         "No data available"}
                                 </p>
                             </TooltipContent>
