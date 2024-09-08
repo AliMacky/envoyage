@@ -75,7 +75,7 @@ const ClientSidebar = ({ role }) => {
                 {role === "control" &&
                     <SidebarLink href="/chat/controllers" icon={<Users className="w-5 h-5"/>} text="Collaborate"
                                  isOpen={isOpen}/>}
-                <SidebarLink href="/vitals" icon={<Activity className="w-5 h-5"/>} text="My Health" isOpen={isOpen}/>
+                <SidebarLink href="/vitals" icon={<Activity className="w-5 h-5"/>} text={"Vitals"} isOpen={isOpen}/>
                 <SidebarLink href="/journal" icon={<NotebookIcon className="w-5 h-5"/>} text="Journal" isOpen={isOpen}/>
                 <SidebarLink href="/journal-history" icon={<FileClock className="w-5 h-5"/>} text="Journal History"
                              isOpen={isOpen}/>
