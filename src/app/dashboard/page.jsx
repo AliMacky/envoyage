@@ -11,10 +11,10 @@ const page = () => {
             </div>
             <div className="flex-1 w-full p-4">
                 <div className={"text-sm text-gray-500 flex gap-1 items-center"}>
-                    Envoyage <ChevronRight size={15}/> Dashboard
+                    Envoyage <ChevronRight size={15}/> Spacecraft
                 </div>
                 <div className={"font-semibold text-4xl tracking-tight mt-2"}>
-                    Dashboard
+                    Spacecraft
                 </div>
                 <div className={"text-sm text-white flex gap-1 items-center my-2"}>
                     Track the vitals of your spacecraft.
@@ -54,7 +54,7 @@ const page = () => {
                             </div>
                             <div className={"py-2 px-4"}>
                                 <div className={"my-2 text-sm text-gray-500 pb-2"}>Power levels over time</div>
-                                <div className="grid grid-cols-3 gap-4 flex flex-1 items-center">
+                                <div className="grid grid-cols-3 gap-4">
                                     <FuelChart />
                                     <BatteryChart />
                                     <PowerChart />
