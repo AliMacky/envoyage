@@ -20,12 +20,12 @@ import {
 export const description = "A simple area chart"
 
 const oxygenChartData = [
-    { day: "Tuesday", mmHg: 80 },
-    { day: "Wednesday", mmHg: 72 },
-    { day: "Thursday", mmHg: 83 },
-    { day: "Friday", mmHg: 67 },
-    { day: "Saturday", mmHg: 78 },
-    { day: "Sunday", mmHg: 91 },
+    { day: "Tuesday", mmHg: Math.random() * (90 - 65) + 65 },
+    { day: "Wednesday", mmHg: Math.random() * (90 - 65) + 65 },
+    { day: "Thursday", mmHg: Math.random() * (90 - 65) + 65 },
+    { day: "Friday", mmHg: Math.random() * (90 - 65) + 65 },
+    { day: "Saturday", mmHg: Math.random() * (90 - 65) + 65 },
+    { day: "Sunday", mmHg: Math.random() * (90 - 65) + 65 },
 ]
 
 const oxygenChartConfig = {
@@ -71,12 +71,12 @@ export function OxygenChart() {
 }
 
 const co2ChartData = [
-    { day: "Tuesday", ppm: 510 },
-    { day: "Wednesday", ppm: 789 },
-    { day: "Thursday", ppm: 432 },
-    { day: "Friday", ppm: 499 },
-    { day: "Saturday", ppm: 532 },
-    { day: "Sunday", ppm: 422 },
+    { day: "Tuesday", ppm: Math.random() * (600 - 400) + 400 },
+    { day: "Wednesday", ppm: Math.random() * (600 - 400) + 400 },
+    { day: "Thursday", ppm: Math.random() * (600 - 400) + 400 },
+    { day: "Friday", ppm: Math.random() * (600 - 400) + 400 },
+    { day: "Saturday", ppm: Math.random() * (600 - 400) + 400 },
+    { day: "Sunday", ppm: Math.random() * (600 - 400) + 400 },
 ]
 
 const co2ChartConfig = {
@@ -122,12 +122,12 @@ export function CO2Chart() {
 }
 
 const pChartData = [
-    { day: "Tuesday", kPa: 97 },
-    { day: "Wednesday", kPa: 88 },
-    { day: "Thursday", kPa: 85 },
-    { day: "Friday", kPa: 79 },
-    { day: "Saturday", kPa: 87 },
-    { day: "Sunday", kPa: 92 },
+    { day: "Tuesday", kPa: Math.random() * (98 - 80) + 80 },
+    { day: "Wednesday", kPa: Math.random() * (98 - 80) + 80 },
+    { day: "Thursday", kPa: Math.random() * (98 - 80) + 80 },
+    { day: "Friday", kPa: Math.random() * (98 - 80) + 80 },
+    { day: "Saturday", kPa: Math.random() * (98 - 80) + 80 },
+    { day: "Sunday", kPa: Math.random() * (98 - 80) + 80 },
 ]
 
 const pChartConfig = {
@@ -392,12 +392,12 @@ export function PowerChart() {
 }
 
 const tempChartData = [
-    { month: "Tuesday", desktop: 77, mobile: 80 },
-    { month: "Wednesday", desktop: 72, mobile: 200 },
-    { month: "Thursday", desktop: 73, mobile: 120 },
-    { month: "Friday", desktop: 75, mobile: 190 },
-    { month: "Saturday", desktop: 67, mobile: 130 },
-    { month: "Sunday", desktop: 74, mobile: 140 },
+    { month: "Tuesday", desktop: Math.random() * (77 - 66) + 66 },
+    { month: "Wednesday", desktop: Math.random() * (77 - 66) + 66 },
+    { month: "Thursday", desktop: Math.random() * (77 - 66) + 66 },
+    { month: "Friday", desktop: Math.random() * (77 - 66) + 66 },
+    { month: "Saturday", desktop: Math.random() * (77 - 66) + 66 },
+    { month: "Sunday", desktop: Math.random() * (77 - 66) + 66 },
 ]
 const tempChartConfig = {
     desktop: {

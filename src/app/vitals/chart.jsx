@@ -25,12 +25,12 @@ import {
 export const description = "A simple area chart";
 
 const bloodOChartData = [
-    { day: "Tuesday", "%": 98.4 },
-    { day: "Wednesday", "%": 99.1 },
-    { day: "Thursday", "%": 98.4 },
-    { day: "Friday", "%": 95.7 },
-    { day: "Saturday", "%": 96.1 },
-    { day: "Sunday", "%": 97.8 },
+    { day: "Tuesday", "%": Math.random() * (99 - 92) + 92 },
+    { day: "Wednesday", "%": Math.random() * (99 - 92) + 92 },
+    { day: "Thursday", "%": Math.random() * (99 - 92) + 92 },
+    { day: "Friday", "%": Math.random() * (99 - 92) + 92 },
+    { day: "Saturday", "%": Math.random() * (99 - 92) + 92 },
+    { day: "Sunday", "%": Math.random() * (99 - 92) + 92 },
 ];
 
 const bloodOChartConfig = {
@@ -94,12 +94,12 @@ export function BloodOChart() {
 }
 
 const bodyTempData = [
-    { day: "Tuesday", desktop: 98.3, mobile: 80 },
-    { day: "Wednesday", desktop: 97.8, mobile: 200 },
-    { day: "Thursday", desktop: 98.5, mobile: 120 },
-    { day: "Friday", desktop: 96.4, mobile: 190 },
-    { day: "Saturday", desktop: 98.9, mobile: 130 },
-    { day: "Sunday", desktop: 97.5, mobile: 140 },
+    { day: "Tuesday", desktop: Math.random() * (102 - 93) + 93 },
+    { day: "Wednesday", desktop: Math.random() * (102 - 93) + 93 },
+    { day: "Thursday", desktop: Math.random() * (102 - 93) + 93 },
+    { day: "Friday", desktop: Math.random() * (102 - 93) + 93 },
+    { day: "Saturday", desktop: Math.random() * (102 - 93) + 93 },
+    { day: "Sunday", desktop: Math.random() * (102 - 93) + 93 },
 ];
 
 const bodyTempConfig = {

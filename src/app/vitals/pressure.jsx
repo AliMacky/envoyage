@@ -21,12 +21,12 @@ import {
 export const description = "A multiple line chart";
 
 const chartData = [
-    { month: "Tuesday", desktop: 117, mobile: 86 },
-    { month: "Wednesday", desktop: 120, mobile: 73 },
-    { month: "Thursday", desktop: 111, mobile: 72 },
-    { month: "Friday", desktop: 130, mobile: 77 },
-    { month: "Saturday", desktop: 112, mobile: 77 },
-    { month: "Sunday", desktop: 122, mobile: 78 },
+    { month: "Tuesday", desktop: Math.random() * (130 - 110) + 110, mobile: Math.random() * (70 - 90) + 70 },
+    { month: "Wednesday", desktop: Math.random() * (130 - 110) + 110, mobile: Math.random() * (70 - 90) + 70 },
+    { month: "Thursday", desktop: Math.random() * (130 - 110) + 110, mobile: Math.random() * (70 - 90) + 70 },
+    { month: "Friday", desktop: Math.random() * (130 - 110) + 110, mobile: Math.random() * (70 - 90) + 70 },
+    { month: "Saturday", desktop: Math.random() * (130 - 110) + 110, mobile: Math.random() * (70 - 90) + 70 },
+    { month: "Sunday", desktop: Math.random() * (130 - 110) + 110, mobile: Math.random() * (70 - 90) + 70 },
 ];
 
 const chartConfig = {
