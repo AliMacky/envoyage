@@ -100,8 +100,8 @@ export function Chat({ chatId, history, uid, affiliation, role }) {
 
     return (
         <div className="h-full rounded-lg flex flex-col sm:flex-row flex-1">
-            <div className="flex flex-1 p-10 flex-col gap-2 h-full overflow-hidden">
-                <div className="flex flex-col gap-4 flex-1 mt-6 md:mx-44 overflow-y-auto pr-4 mb-4">
+            <div className="flex flex-1 pb-3 flex-col gap-2 h-full overflow-hidden">
+                <div className="flex flex-col gap-4 flex-1 mt-6 md:mx-24 overflow-y-auto pr-4 mb-4">
                     {messages.map((msg, i) =>
                         msg.uid !== uid ? (
                             <motion.div
@@ -143,7 +143,7 @@ export function Chat({ chatId, history, uid, affiliation, role }) {
                     )}
                 </div>
                 <form
-                    className="flex relative justify-center md:mx-44 mx-none"
+                    className="flex relative justify-center md:mx-24 mx-none"
                     onSubmit={handleSubmit}
                 >
                     <div
