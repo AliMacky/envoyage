@@ -32,7 +32,7 @@ const chartData = [
 const chartConfig = {
     desktop: {
         label: "Desktop",
-        color: "hsl(var(--chart-1))",
+        color: "blue",
     },
 };
 
@@ -40,10 +40,10 @@ export function Component() {
     return (
         <ChartContainer config={chartConfig} className="mx-auto max-h-[30vh]">
             <RadarChart data={chartData}>
-                <ChartTooltip
+                {/* <ChartTooltip
                     cursor={false}
                     content={<ChartTooltipContent />}
-                />
+                /> */}
                 <PolarAngleAxis dataKey="month" />
                 <PolarGrid />
                 <Radar
