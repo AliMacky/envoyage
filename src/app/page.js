@@ -3,8 +3,12 @@ import {ArrowRight, Info} from "lucide-react";
 import Navbar from "@/components/navbar";
 import Particles from "@/components/ui/particles.jsx";
 import Link from "next/link";
+import {getUser} from "@/lib/actions/getUser";
 
-export default function Home() {
+export default async function Home() {
+    const user = await getUser()
+    const isAuthed = user !== null
+
     return (
         <div>
             <Navbar/>
@@ -36,12 +40,12 @@ export default function Home() {
                         </div>
                     </div>
                     <div className={"mt-10 flex gap-4"}>
-                        <Link href={"/dashboard"}
+                        <Link href={isAuthed? "/dashboard" : "/login"}
                               className={"px-8 py-3.5 bg-zinc-800 hover:bg-zinc-700 transition ease-in-out duration-300 text-white rounded-xl flex gap-2 items-center cursor-pointer"}>
                             Start Now
                             <ArrowRight/>
                         </Link>
-                        <Link href={"/dashboard"}
+                        <Link href={isAuthed? "/dashboard" : "/login"}
                               className={"px-8 py-3.5 border rounded-xl flex gap-2 items-center hover:bg-zinc-700/40 transition ease-in-out duration-300 cursor-pointer"}>
                             Learn More
                             <Info/>

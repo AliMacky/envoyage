@@ -4,5 +4,5 @@ import {getUserInfo} from "@/lib/actions/getUserInfo";
 export default async function Sidebar() {
     const user = await getUserInfo()
 
-    return(<ClientSidebar role={user.role}/>)
+    return(<ClientSidebar role={user.role} uid={user.uid}/>)
 }

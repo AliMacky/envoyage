@@ -35,7 +35,7 @@ export default function Home() {
         if (error) {
             console.error("Sign in error:", error.message);
         } else {
-            await router.push("/dashboard");
+            router.push("/dashboard");
         }
     };
 

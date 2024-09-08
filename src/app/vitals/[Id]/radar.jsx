@@ -21,12 +21,12 @@ import {
 export const description = "A radar chart";
 
 const chartData = [
-    { month: "CO2 Levels", desktop: 186 },
-    { month: "Glucose Levels", desktop: 305 },
-    { month: "Hydration", desktop: 237 },
-    { month: "Muscle Activity", desktop: 273 },
-    { month: "Cog. Reaction Time", desktop: 209 },
-    { month: "Stress Levels", desktop: 214 },
+    { month: "CO2 Levels", desktop: Math.random() * (300 - 200) + 200 },
+    { month: "Glucose Levels", desktop: Math.random() * (300 - 200) + 200 },
+    { month: "Hydration", desktop: Math.random() * (300 - 200) + 200 },
+    { month: "Muscle Activity", desktop: Math.random() * (300 - 200) + 200 },
+    { month: "Cog. Reaction Time", desktop: Math.random() * (300 - 200) + 200 },
+    { month: "Stress Levels", desktop: Math.random() * (300 - 200) + 100 },
 ];
 
 const chartConfig = {
@@ -38,7 +38,7 @@ const chartConfig = {
 
 export function Component() {
     return (
-        <ChartContainer config={chartConfig} className="mx-auto max-h-[30vh]">
+        <ChartContainer config={chartConfig} className="mx-auto max-h-[25vh]">
             <RadarChart data={chartData}>
                 {/* <ChartTooltip
                     cursor={false}
