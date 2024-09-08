@@ -21,7 +21,7 @@ export default async function Home() {
                     Journal History
                 </div>
                 <div className="mt-4 space-y-4">
-                    {journals.map((journal, index) => (
+                    {journals !== null && journals.map((journal, index) => (
                         <Link href={`/journal/${journal.id}`} key={journal.id}>
                             <div className="p-4 my-3 bg-zinc-900 rounded-lg hover:bg-zinc-800 transition-colors flex gap-4 items-center">
                                 <div>
