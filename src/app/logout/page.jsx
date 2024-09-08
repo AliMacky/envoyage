@@ -1,10 +1,9 @@
-"use client"
-import {createClient} from "@/lib/supabase/client";
+import {createClient} from "@/lib/supabase/server";
 import {redirect} from "next/navigation";
 
-export default function Home() {
+export default async function Home() {
     const supabase = createClient()
-    supabase.auth.signOut()
+    await supabase.auth.signOut()
     redirect('/')
 
     return (

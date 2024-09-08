@@ -4,7 +4,6 @@ import * as React from 'react';
 import Sidebar from "@/components/sidebar";
 import { ChevronRight } from "lucide-react";
 
-// Main component
 export default function Home() {
 
     return (

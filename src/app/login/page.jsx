@@ -35,7 +35,7 @@ export default function Home() {
         if (error) {
             console.error("Sign in error:", error.message);
         } else {
-            await router.push("/chat");
+            await router.push("/dashboard");
         }
     };
 
