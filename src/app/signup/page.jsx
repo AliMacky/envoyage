@@ -69,7 +69,7 @@ export default function Home() {
                             <Label htmlFor="email">Email Address</Label>
                             <Input
                                 id="email"
-                                placeholder="archibald@email.ai"
+                                placeholder="johndoe@email.ai"
                                 type="email"
                             />
                         </LabelInputContainer>

@@ -208,7 +208,7 @@ export function BodyTempChart() {
           activeDot={{
             r: 6,
           }}
-        ></Line>
+        />
       </LineChart>
     </ChartContainer>
   );
