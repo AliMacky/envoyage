@@ -14,6 +14,7 @@ export function Chat({ chatId, history, uid, affiliation, role }) {
     const [transcript, setTranscript] = useState("");
     const [recognition, setRecognition] = useState(null);
     const delay = Math.floor(Math.random() * 1260) + 240;
+
     const startListening = () => {
         if (recognition) {
             recognition.start();
@@ -40,7 +41,6 @@ export function Chat({ chatId, history, uid, affiliation, role }) {
     };
 
     useEffect(() => {
-        // speech recognition configuration
         if (!("webkitSpeechRecognition" in window)) {
             alert("Your browser does not support speech recognition.");
             return;
@@ -97,21 +97,18 @@ export function Chat({ chatId, history, uid, affiliation, role }) {
             setInputMessage(transcript);
         }
     }, [transcript]);
-    const [showLanding, setShowLanding] = useState(false);
 
     return (
         <div className="h-full rounded-lg flex flex-col sm:flex-row flex-1">
             <div className="flex flex-1 p-10 flex-col gap-2 h-full overflow-hidden">
                 <div className="flex flex-col gap-4 flex-1 mt-6 md:mx-44 overflow-y-auto pr-4 mb-4">
-                    <div className="font-semibold text-3xl tracking-tight">
-                        Delay: {Math.floor(delay / 60)}:{delay % 60}
-                    </div>
                     {messages.map((msg, i) =>
                         msg.uid !== uid ? (
                             <motion.div
                                 key={`${msg.id}-user-${i}`}
                                 initial={{ opacity: 0.0, y: 40 }}
                                 animate={{ opacity: 1, y: 0 }}
+                                delay={500}
                                 transition={{
                                     type: "spring",
                                     duration: 0.6,
@@ -129,6 +126,7 @@ export function Chat({ chatId, history, uid, affiliation, role }) {
                                 key={`${msg.id}-user-${i}`}
                                 initial={{ opacity: 0.0, y: 40 }}
                                 animate={{ opacity: 1, y: 0 }}
+                                delay={500}
                                 transition={{
                                     type: "spring",
                                     duration: 0.6,
